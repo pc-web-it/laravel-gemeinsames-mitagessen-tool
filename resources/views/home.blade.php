@@ -25,7 +25,7 @@
     <div
         class="p-5 fixed z-10  md:w-[120px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Namen</a></div>
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="md:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
         <div class="md:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
@@ -34,8 +34,8 @@
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
-    <div class="overflow-hidden">
-    <form action="/random" method="GET">
+   
+    <form action="/random" method="GET" class="overflow-hidden">
         
             <button class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-200 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
                 Generate
@@ -48,9 +48,26 @@
                         {{$errors->first('date')}}
                 @endif
             </div>
-            
-        </h1>
+            </h1>
     </form>
+    
+    <form action="{{ route('regenerate.data') }}" method="GET" class="text-center mt-4">
+        @if(session('showRegenerateButton', false))
+            <button type="submit" class="text-[3vw] md:text-[2vw] font-sans font-medium py-3 px-8 md:w-[40vw] lg:w-[20vw] p-4 rounded-full bg-neutral-200 hover:scale-105 ease-in-out duration-300">
+                Regenerate
+            </button>
+            <input  type="hidden" name="date" value="{{ $datum }}">
+            <div class="text-sm text-red-700 mb-2">
+                @if($errors->any())
+                    {{$errors->first('date')}}
+                @endif
+            </div>
+        @endif
+    </form>
+
+
+    
+
 
     <div class="grid grid-cols-1 text-2xl md:grid-cols-2  text-center mt-16">
         <div>

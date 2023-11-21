@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Namen extends Model
 {
     use HasFactory;
+    
 }

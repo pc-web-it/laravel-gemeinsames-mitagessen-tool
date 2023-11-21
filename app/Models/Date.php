@@ -10,6 +10,9 @@ class Date extends Model
 {
     use HasFactory;
 
+    protected $table = 'dates';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
     protected $fillable = [
         'date',
         'namepraesentiert',
@@ -18,6 +21,8 @@ class Date extends Model
         'namegekochtid',
     ];
     
+    protected $dates = ['date'];
+    
     public function praesentiert(): HasOne
     {
         return $this->hasOne(Employee::class, 'id', 'namepraesentiertid');
@@ -25,5 +30,15 @@ class Date extends Model
     public function gekocht(): HasOne
     {
         return $this->hasOne(Employee::class, 'id', 'namegekochtid');
+    } 
+
+    public function employeeForNamepraesentiert()
+    {
+        return $this->belongsTo(Employee::class, 'namepraesentiertid', 'id');
+    }
+
+    public function employeeForNamegekocht()
+    {
+        return $this->belongsTo(Employee::class, 'namegekochtid', 'id');
     }
 }

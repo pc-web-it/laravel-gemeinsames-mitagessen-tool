@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
+    protected $table = 'employees';
+    protected $primaryKey = 'id';
+    public $timestamps = false;
     protected $fillable = [
         'name',
         'praesentiert',
@@ -21,5 +24,15 @@ class Employee extends Model
         'size',
 
     ];
+
+    public function dateForNamepraesentiert()
+    {
+        return $this->hasOne(Date::class, 'namepraesentiertid', 'id');
+    }
+
+    public function dateForNamegekocht()
+    {
+        return $this->hasOne(Date::class, 'namegekochtid', 'id');
+    }
 
 }
