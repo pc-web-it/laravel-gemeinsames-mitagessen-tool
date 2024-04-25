@@ -63,7 +63,7 @@
                 </form>
             </div>
             <div class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-2 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
-                
+
                 <h2 class="col-span-2">Praesentiert:</h2>
 
                 <div class="col-span-3">
@@ -151,9 +151,13 @@
             </div>
 
         </div>
-        
+
         @endforeach
-    </div>
+
+        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
+            {{ $dates->links() }}
+        </div>
+     </div>
 
 </body>
 

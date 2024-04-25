@@ -23,17 +23,17 @@
     <style>
         .flex-container {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
         }
 
         .profile-icon-container {
-            margin-left: 5px; 
+            margin-left: 5px;
         }
     </style>
 </head>
 
 <body class="">
-    
+
     <div
         class="bg-white p-4 z-20 lg:w-[120px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
@@ -95,7 +95,7 @@
                         <label class="absolute p-[14px] cursor-pointer">
                             <input type="file" name="file" class="hidden" onchange="form.submit()" />
                         </label>
-                        <div class="flex ">
+                        <div class="flex">
                             @if($name->praesentiert == 1)
                                 <img src="pr.png" alt="Praesentiert Icon" class="w-5 h-5 opacity-40">
                             @endif
@@ -132,6 +132,9 @@
             </div>
         @endforeach
 
+        <div>
+            {{ $names->links() }}
+        </div>
     </div>
 
 

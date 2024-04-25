@@ -33,20 +33,24 @@ class EmployeesController extends Controller
 
     public function list()
     {
-        $employees = Employee::all()->sortBy(function($employee) {
-            // Teilen Sie den Namen durch Leerzeichen in Teile auf und geben Sie den letzten Teil (Nachname) zurück
-            $lastNames = explode(' ', $employee->name);
-            return Str::lower(end($lastNames)); // Stellen Sie sicher, dass Sie Zeichenfolgen in Kleinbuchstaben vergleichen
-        });
-    
+        // $employees = Employee::all()->sortBy(function($employee) {
+        //     // Teilen Sie den Namen durch Leerzeichen in Teile auf und geben Sie den letzten Teil (Nachname) zurück
+        //     $lastNames = explode(' ', $employee->name);
+        //     return Str::lower(end($lastNames)); // Stellen Sie sicher, dass Sie Zeichenfolgen in Kleinbuchstaben vergleichen
+        // })->simplePaginate(10);
+
+        // Order by the name of Employee and adding a simplePaginate (max 10 employees for page)
+        $employees = Employee::orderBy('name')->simplePaginate(10);
+
         return view('Names', ['names' => $employees]);
     }
-    
+
     public function create()
     {
         return view('Names');
     }
-    public function store(Request $request) //Neuen Eintrag in Datenbank
+
+    public function store(Request $request) // Neuen Eintrag in Datenbank
     {
         $validator = Validator::make($request->all(), [
             'name' => [
@@ -62,51 +66,51 @@ class EmployeesController extends Controller
         Employee::create($validated);
         return redirect('Namen');
     }
-    public function update($id, Request $request) 
+    public function update($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => ['required', 'max:35'],
         ]);
-    
+
         if ($validator->fails()) {
             return redirect('Namen')->withErrors([$id => 'Feld darf nicht leer sein und maximal 35 Zeichen haben']);
         }
-    
+
         $validated = $validator->validated();
-    
+
         try {
             DB::beginTransaction();
-    
+
             // Aktualisieren Sie die Daten in der Mitarbeitertabelle
             $employee = Employee::find($id);
             $employee->name = $validated['name'];
             $employee->save();
-    
+
             // Rufen Sie Datensätze aus der Tabelle „Datum“ nach ID ab und aktualisieren Sie deren Namen
             $dates = Date::where('namepraesentiertid', $id)
                          ->orWhere('namegekochtid', $id)
                          ->get();
-    
+
             foreach ($dates as $date) {
                 if ($date->namepraesentiertid == $id) {
                     $date->update(['namepraesentiert' => $validated['name']]);
                 }
-    
+
                 if ($date->namegekochtid == $id) {
                     $date->update(['namegekocht' => $validated['name']]);
                 }
             }
-    
+
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
             return redirect('Namen')->withErrors([$id => 'Fehler beim Speichern der Daten. Bitte versuchen Sie es erneut.']);
         }
-    
+
         return redirect('Namen');
     }
-    
-    
+
+
 
     public function delete($id) //Person löschen
     {
@@ -134,7 +138,7 @@ class EmployeesController extends Controller
         if ($validator->fails()) {
             return redirect('/')->withErrors(['date' => 'ungültiges Datum']);
         }
-        
+
 
 
         $datum = Carbon::now()->format('d.m.Y');
@@ -164,25 +168,25 @@ class EmployeesController extends Controller
 
         $employeesForPresentation = Employee::where('praesentiert', false)->get();
         $employeesForCooking = Employee::where('gekocht', false)->get();
-    
+
         // Wenn nicht genügend Mitarbeiter für die Präsentation oder Vorbereitung vorhanden sind, setzen Sie alle Werte zurück
         if (count($employeesForPresentation) < 2 || count($employeesForCooking) < 1) {
             Employee::query()->update(['praesentiert' => false, 'gekocht' => false]);
             $employeesForPresentation = Employee::where('praesentiert', false)->get();
             $employeesForCooking = Employee::where('gekocht', false)->get();
         }
-    
+
         // Auswahl zufälliger Mitarbeiter zur Präsentation und Vorbereitung (es darf nicht derselbe Mitarbeiter sein)
         $randomPresentationEmployee = $employeesForPresentation->random();
         do {
             $randomCookingEmployee = $employeesForCooking->random();
         } while ($randomPresentationEmployee->id == $randomCookingEmployee->id);
-    
+
         // Setzen der Checkboxen „praesentiert“ und „gekocht“ für die ausgewählten Mitarbeiter
-    
+
         $randomPresentationEmployee->update(['praesentiert' => true]);
         $randomCookingEmployee->update(['gekocht' => true]);
-    
+
         // Erstellen eines Datensatzes in der Datenbank
         Date::create([
             'date' => $request->date,
@@ -191,38 +195,38 @@ class EmployeesController extends Controller
             'namepraesentiertid' => $randomPresentationEmployee->id,
             'namegekochtid' => $randomCookingEmployee->id,
         ]);
-    
+
         // Festlegen einer Sitzungsvariablen zur Anzeige der Schaltfläche „Regenerate“
         session(['showRegenerateButton' => true]);
-    
+
         // Geben Sie eine Antwort mit der Ansicht und den erforderlichen Daten zurück
         return view('home', [
             'random1' => $randomPresentationEmployee,
             'random2' => $randomCookingEmployee,
             'datum' => $request->date,
         ]);
-       
 
-        
+
+
         /*ein Code der sicher funktioniert falls der obere nicht funktionieren sollte*/
         /*
         $counter = 0;
         do {
 
-            $random1 = Name::where('praesentiert', false) 
+            $random1 = Name::where('praesentiert', false)
                 ->inRandomOrder()
                 ->first();
-            if ($random1 == null) { 
+            if ($random1 == null) {
                 $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) { 
+                for ($i = 0; $i < count($names); $i++) {
                     $names[$i]->praesentiert = false;
                     $names[$i]->save();
                 }
-                $random1 = Name::where('praesentiert', false) 
+                $random1 = Name::where('praesentiert', false)
                     ->inRandomOrder()
                     ->first();
             }
-            $random2 = Name::where('gekocht', false) 
+            $random2 = Name::where('gekocht', false)
                 ->inRandomOrder()
                 ->first();
             if ($random2 == null) {
@@ -254,20 +258,20 @@ class EmployeesController extends Controller
         $random1 = $random1->name;
         $random2 = $random2->name;
         return view('home', ['random1' => $random1, 'random2' => $random2]);*/
-    
+
     }
-    
+
 
     public function regenerateData(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'date' => ['required', 'date_format:d.m.Y'],
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-    
+
         $random1 = Employee::where('praesentiert', false)
             ->inRandomOrder()
             ->first();
@@ -278,7 +282,7 @@ class EmployeesController extends Controller
                 $employeesAll[$i]->save();
             }
         }
-    
+
         $random2 = Employee::where('gekocht', false)
             ->inRandomOrder()
             ->first();
@@ -288,20 +292,20 @@ class EmployeesController extends Controller
                 $employeesAll[$i]->gekocht = false;
                 $employeesAll[$i]->save();
             }
-        } 
-          
+        }
+
         // Prüfen Sie, ob neue Mitarbeiter gefunden werden
         if (!$random1 || !$random2) {
             return redirect()->back()->withErrors(['date' => 'Es konnten keine neuen Mitarbeiter gefunden werden']);
         }
-    
+
         $latestDate = Date::latest('id')->first();
-    
+
         // Prüfen Sie, ob das späteste Datum vorhanden ist
         if (!$latestDate) {
             return redirect()->back()->withErrors(['date' => 'Kein vorheriges Datum gefunden']);
         }
-    
+
         // Vorherige Mitarbeiterdaten auf „falsch“ aktualisieren
         $praesentiertEmployee = Employee::find($latestDate->namepraesentiertid);
         $gekochtEmployee = Employee::find($latestDate->namegekochtid);
@@ -309,24 +313,24 @@ class EmployeesController extends Controller
         $gekochtEmployee->gekocht = false;
         $praesentiertEmployee->save();
         $gekochtEmployee->save();
-    
+
         $random1->praesentiert = true;
         $random1->save();
         $random2->gekocht = true;
         $random2->save();
-    
+
         $latestDate->update([
             'namepraesentiert' => $random1->name,
             'namegekocht' => $random2->name,
             'namepraesentiertid' => $random1->id,
             'namegekochtid' => $random2->id,
         ]);
-    
+
         return view('home', ['random1' => $random1, 'random2' => $random2, 'datum' => $request->date]);
     }
-    
 
-    
+
+
     public function upload($id, Request $request) //Profilbild hochladen
     {
         $employee = Employee::find($id);
