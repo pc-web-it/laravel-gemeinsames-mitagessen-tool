@@ -42,6 +42,8 @@
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/lucky-wheel"
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
             class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
 
