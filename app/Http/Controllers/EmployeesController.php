@@ -295,11 +295,14 @@ class EmployeesController extends Controller
             }
         }
 
-        $random2 = Employee::where('gekocht', false)
+        do {
+            $random2 = Employee::where('gekocht', false)
             ->where('is_available', true)
             ->where('still_working', true)
             ->inRandomOrder()
             ->first();
+        }while($random1->id == $random2->id);
+
         if ($random2 == null || $random2 == $random1) {
             $employeesAll = Employee::all();
             for ($i = 0; $i < count($employeesAll); $i++) {
