@@ -28,19 +28,14 @@ class EmployeesController extends Controller
         ];
 
         return Response::file($imagePath, $headers);
-
     }
 
     public function list()
     {
-        // $employees = Employee::all()->sortBy(function($employee) {
-        //     // Teilen Sie den Namen durch Leerzeichen in Teile auf und geben Sie den letzten Teil (Nachname) zurück
-        //     $lastNames = explode(' ', $employee->name);
-        //     return Str::lower(end($lastNames)); // Stellen Sie sicher, dass Sie Zeichenfolgen in Kleinbuchstaben vergleichen
-        // })->simplePaginate(10);
-
-        // Order by the name of Employee and adding a simplePaginate (max 10 employees for page)
-        $employees = Employee::orderBy('name')->simplePaginate(10);
+        // Order by the last name of Employee and adding a simplePaginate (max 8 employees for page)
+        $employees = Employee::where('still_working', 1)
+            ->orderByRaw("SUBSTRING_INDEX(name, ' ', -1)")
+            ->simplePaginate(8);
 
         return view('Names', ['names' => $employees]);
     }
@@ -84,12 +79,13 @@ class EmployeesController extends Controller
             // Aktualisieren Sie die Daten in der Mitarbeitertabelle
             $employee = Employee::find($id);
             $employee->name = $validated['name'];
+            $employee->is_available = $request->is_available == null ? 1 : 0;
             $employee->save();
 
             // Rufen Sie Datensätze aus der Tabelle „Datum“ nach ID ab und aktualisieren Sie deren Namen
             $dates = Date::where('namepraesentiertid', $id)
-                         ->orWhere('namegekochtid', $id)
-                         ->get();
+                ->orWhere('namegekochtid', $id)
+                ->get();
 
             foreach ($dates as $date) {
                 if ($date->namepraesentiertid == $id) {
@@ -118,9 +114,9 @@ class EmployeesController extends Controller
         $employee = Employee::find($id);
         if (File::exists(storage_path('/app/public/' . $employee->file_hash))) { //Profilbild mit löschen
             File::delete(storage_path('/app/public/' . $employee->file_hash));
-
         }
-        $employee->delete();
+        $employee->still_working = 0;
+        $employee->save();
         return redirect('Namen');
     }
 
@@ -140,66 +136,81 @@ class EmployeesController extends Controller
         }
 
 
+        // $random1 = Employee::where('praesentiert', false) //random jemanden zum präsentieren auswählen
+        //     ->where('is_available', true)   // Filter by employees who are available
+        //     ->where('still_working', true)  // Filter by employees who still_working in the office
+        //     ->inRandomOrder()
+        //     ->first();
+        // if ($random1 == null) { //wenn alle praesentiert haben
+        //     $employeesAll = Employee::all();
+        //     for ($i = 0; $i < count($employeesAll); $i++) { //wenn alle praesentiert haben wieder alles auf false setzen
+        //         $employeesAll[$i]->praesentiert = false;
+        //         $employeesAll[$i]->save();
+        //     }
+        // }
 
-        $datum = Carbon::now()->format('d.m.Y');
-        $random1 = Employee::where('praesentiert', false) //random jemanden zum präsentieren auswählen
-            ->inRandomOrder()
-            ->first();
-        if ($random1 == null) { //wenn alle praesentiert haben
-            $employeesAll = Employee::all();
-            for ($i = 0; $i < count($employeesAll); $i++) { //wenn alle praesentiert haben wieder alles auf false setzen
-                $employeesAll[$i]->praesentiert = false;
-                $employeesAll[$i]->save();
-            }
+        // $random2 = Employee::where('gekocht', false) //gleiches prinzip (nicht in einer schleife gemeinsam falls personen aus der Datenbank gelöscht werden)
+        //     ->where('is_available', true)   // Filter by employees who are available
+        //     ->where('still_working', true)  // Filter by employees who still_working in the office
+        //     ->inRandomOrder()
+        //     ->first();
+        // if ($random2 == null) {
+        //     $employeesAll = Employee::all();
+        //     for ($i = 0; $i < count($employeesAll); $i++) {
+        //         $employeesAll[$i]->gekocht = false;
+        //         $employeesAll[$i]->save();
+        //     }
+        // }
 
-        }
+        $employeesForPresentation = Employee::where('praesentiert', false)
+            ->where('is_available', true)
+            ->where('still_working', true)
+            ->get();
+        $employeesForCooking = Employee::where('gekocht', false)
+            ->where('is_available', true)
+            ->where('still_working', true)
+            ->get();
 
-        $random2 = Employee::where('gekocht', false) //gleiches prinzip (nicht in einer schleife gemeinsam falls personen aus der Datenbank gelöscht werden)
-            ->inRandomOrder()
-            ->first();
-        if ($random2 == null) {
-            $employeesAll = Employee::all();
-            for ($i = 0; $i < count($employeesAll); $i++) {
-                $employeesAll[$i]->gekocht = false;
-                $employeesAll[$i]->save();
-            }
-
-        }
-
-        $employeesForPresentation = Employee::where('praesentiert', false)->get();
-        $employeesForCooking = Employee::where('gekocht', false)->get();
-
-        // Wenn nicht genügend Mitarbeiter für die Präsentation oder Vorbereitung vorhanden sind, setzen Sie alle Werte zurück
-        if (count($employeesForPresentation) < 2 || count($employeesForCooking) < 1) {
+        // If there are not enough people to present or prepare, reset all values
+        if (((count($employeesForPresentation) === 1 && count($employeesForCooking) === 1) &&
+                ($employeesForPresentation->first()->id === $employeesForCooking->first()->id))
+                || (count($employeesForPresentation) < 1 || count($employeesForCooking) < 1)
+        ) {
             Employee::query()->update(['praesentiert' => false, 'gekocht' => false]);
-            $employeesForPresentation = Employee::where('praesentiert', false)->get();
-            $employeesForCooking = Employee::where('gekocht', false)->get();
+            $employeesForPresentation = Employee::where('praesentiert', false)
+                ->where('is_available', true)
+                ->where('still_working', true)
+                ->get();
+            $employeesForCooking = Employee::where('gekocht', false)
+                ->where('is_available', true)
+                ->where('still_working', true)
+                ->get();
         }
 
-        // Auswahl zufälliger Mitarbeiter zur Präsentation und Vorbereitung (es darf nicht derselbe Mitarbeiter sein)
+        // Selection of random employees for presentation and preparation (it cannot be the same employee)
         $randomPresentationEmployee = $employeesForPresentation->random();
         do {
             $randomCookingEmployee = $employeesForCooking->random();
         } while ($randomPresentationEmployee->id == $randomCookingEmployee->id);
 
-        // Setzen der Checkboxen „praesentiert“ und „gekocht“ für die ausgewählten Mitarbeiter
+        // Setting the checkboxes “presented” and “cooked” for the selected employees
 
         $randomPresentationEmployee->update(['praesentiert' => true]);
         $randomCookingEmployee->update(['gekocht' => true]);
 
-        // Erstellen eines Datensatzes in der Datenbank
+        // Creating a record in the database
         Date::create([
-            'date' => $request->date,
+            'date' => Carbon::createFromFormat('d.m.Y', $request->date)->toDateString(),
             'namepraesentiert' => $randomPresentationEmployee->name,
             'namegekocht' => $randomCookingEmployee->name,
             'namepraesentiertid' => $randomPresentationEmployee->id,
             'namegekochtid' => $randomCookingEmployee->id,
         ]);
 
-        // Festlegen einer Sitzungsvariablen zur Anzeige der Schaltfläche „Regenerate“
+        // Setting a session variable to display the Regenerate button
         session(['showRegenerateButton' => true]);
 
-        // Geben Sie eine Antwort mit der Ansicht und den erforderlichen Daten zurück
+        // Return a response with the view and required data
         return view('home', [
             'random1' => $randomPresentationEmployee,
             'random2' => $randomCookingEmployee,
@@ -258,7 +269,6 @@ class EmployeesController extends Controller
         $random1 = $random1->name;
         $random2 = $random2->name;
         return view('home', ['random1' => $random1, 'random2' => $random2]);*/
-
     }
 
 
@@ -273,17 +283,21 @@ class EmployeesController extends Controller
         }
 
         $random1 = Employee::where('praesentiert', false)
+            ->where('is_available', true)
+            ->where('still_working', true)
             ->inRandomOrder()
             ->first();
-        if ($random1 == null) { //wenn alle praesentiert haben
+        if ($random1 == null) { // when everyone has presented
             $employeesAll = Employee::all();
-            for ($i = 0; $i < count($employeesAll); $i++) { //wenn alle praesentiert haben wieder alles auf false setzen
+            for ($i = 0; $i < count($employeesAll); $i++) { //  when everyone has presented, set everything to false again
                 $employeesAll[$i]->praesentiert = false;
                 $employeesAll[$i]->save();
             }
         }
 
         $random2 = Employee::where('gekocht', false)
+            ->where('is_available', true)
+            ->where('still_working', true)
             ->inRandomOrder()
             ->first();
         if ($random2 == null || $random2 == $random1) {
@@ -294,19 +308,19 @@ class EmployeesController extends Controller
             }
         }
 
-        // Prüfen Sie, ob neue Mitarbeiter gefunden werden
+        // Check whether new employees can be found
         if (!$random1 || !$random2) {
             return redirect()->back()->withErrors(['date' => 'Es konnten keine neuen Mitarbeiter gefunden werden']);
         }
 
         $latestDate = Date::latest('id')->first();
 
-        // Prüfen Sie, ob das späteste Datum vorhanden ist
+        // Check if the latest date exists
         if (!$latestDate) {
             return redirect()->back()->withErrors(['date' => 'Kein vorheriges Datum gefunden']);
         }
 
-        // Vorherige Mitarbeiterdaten auf „falsch“ aktualisieren
+        // Update previous employee data to false
         $praesentiertEmployee = Employee::find($latestDate->namepraesentiertid);
         $gekochtEmployee = Employee::find($latestDate->namegekochtid);
         $praesentiertEmployee->praesentiert = false;
@@ -341,7 +355,6 @@ class EmployeesController extends Controller
         }
         if (File::exists(storage_path('/' . $employee->file_hash))) { //altes löschen
             File::delete(storage_path('/' . $employee->file_hash));
-
         }
 
         $hash = $file->hashName(); //hash erstellen falls 2mal gleicher file name mit unterschiedlichen bildern
@@ -354,5 +367,4 @@ class EmployeesController extends Controller
 
         return redirect()->back();
     }
-
 }

@@ -10,12 +10,12 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {   
-        
+    {
+
         Schema::create('dates', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('date');
+            $table->date('date');
             $table->string('namepraesentiert')->nullable();
             $table->string('namegekocht')->nullable();
             $table->integer('namegekochtid')->nullable();

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Test</title>
+    <title>Gemeinsames Mittagessen Tool</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,14 +34,14 @@
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
-   
+
     <form action="/random" method="GET" class="overflow-hidden">
-        
+
             <button class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-200 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
                 Generate
             </button>
             <h1 class="text-center  ml-2 font-sans text-xl font-medium mt-4">
-            Datum: 
+            Datum:
             <input type="text" value="{{$datum}}" name="date" class=" w-28" />
             <div class="text-sm text-red-700 mb-2">
                 @if($errors->any())
@@ -50,7 +50,7 @@
             </div>
             </h1>
     </form>
-    
+
     <form action="{{ route('regenerate.data') }}" method="GET" class="text-center mt-4">
         @if(session('showRegenerateButton', false))
             <button type="submit" class="text-[3vw] md:text-[2vw] font-sans font-medium py-3 px-8 md:w-[40vw] lg:w-[20vw] p-4 rounded-full bg-neutral-200 hover:scale-105 ease-in-out duration-300">
@@ -66,7 +66,7 @@
     </form>
 
 
-    
+
 
 
     <div class="grid grid-cols-1 text-2xl md:grid-cols-2  text-center mt-16">
