@@ -46,4 +46,5 @@ Route::get('/generate-random-name', [FileUploadController::class, 'generateRando
 
 
 Route::get('/gewinner', [LuckyWinnersController::class,'index'])->name('gewinner')->middleware('auth');
+Route::put('/gewinner', [LuckyWinnersController::class, 'store'])->name('winner.store')->middleware('auth');
 

@@ -6,7 +6,11 @@ export default {
     "./resources/**/*.vue",
 ],
   theme: {
-    extend: {},
+    extend: {
+        colors: {
+            clifford: '#da373d',
+        }
+    },
   },
   plugins: [],
 }

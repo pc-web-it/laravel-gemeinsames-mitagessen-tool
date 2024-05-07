@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-    @vite('resources/css/app.css') 
+    @vite('resources/css/app.css')
     <title>Document</title>
-  
+
         <script>
         tailwind.config = {
             theme: {
@@ -69,7 +68,7 @@
                 </form>
             </div>
             <div class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-2 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
-                
+
                 <h2 class="col-span-2">Praesentiert:</h2>
 
                 <div class="col-span-3">
@@ -157,7 +156,7 @@
             </div>
 
         </div>
-        
+
         @endforeach
     </div>
 
