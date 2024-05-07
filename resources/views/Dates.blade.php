@@ -69,7 +69,7 @@
                             @csrf
                             @method('DELETE')
 
-                            <button type="submit" class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
+                            <button class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
                                 <img src="Delete.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
                             </button>
                         </form>
