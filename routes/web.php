@@ -25,11 +25,10 @@ Route::put('Namen/{id}', [EmployeesController::class, 'upload'])->name('name.upl
 Route::delete('Name/delete/{id}', [EmployeesController::class, 'delete'])->name('name.destroy')->middleware('auth');
 
 Route::get('Verlauf', [DatesController::class, 'list'])->middleware('auth');
-Route::get('/VerlaufKochen/{id1}/{id2}/{id3}', [DatesController::class, 'updatePersonKochen'])->middleware('auth');
-Route::get('/VerlaufPraesentieren/{id1}/{id2}/{id3}', [DatesController::class, 'updatePersonPraesentieren'])->middleware('auth');
+Route::patch('Verlauf', [DatesController::class, 'updateAllDate'])->name('date.update')->middleware('auth');
 Route::get('/DateUpdate/{id}', [DatesController::class, 'updateDate'])->middleware('auth');
 Route::delete('Date/delete/{id}', [DatesController::class, 'deleteDate'])->name('date.destroy')->middleware('auth');
-
+Route::put('Date/remove/{id}/{isGekocht}', [DatesController::class, 'removeSingleEmployee'])->name('date.removeEmployee')->middleware('auth');
 
 
 Route::get('/display-image/{file_hash}', [EmployeesController::class, 'displayImage'])->name('display.image')->middleware('auth');

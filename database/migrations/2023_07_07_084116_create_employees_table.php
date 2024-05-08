@@ -10,8 +10,8 @@ return new class extends Migration
      * Run the migrations.
      */
     public function up(): void
-    {   
-       
+    {
+
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->string('name');
