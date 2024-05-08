@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('dates', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->date('date');
+            $table->string('date');
             $table->string('namepraesentiert')->nullable();
             $table->string('namegekocht')->nullable();
             $table->integer('namegekochtid')->nullable();
