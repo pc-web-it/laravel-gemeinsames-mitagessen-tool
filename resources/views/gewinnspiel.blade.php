@@ -12,7 +12,7 @@
 <body class="overflow-y-auto">
     <!-- Navbar -->
     <div
-        class="navbar z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
+        class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
