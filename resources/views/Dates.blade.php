@@ -22,22 +22,25 @@
 
 <body class="overflow-y-auto">
     <div
-        class="z-10 p-5 bg-white fixed top-0 lg:w-[120px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1">
+        class="bg-white p-4 z-20 lg:w-[120px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
+
     </div>
     <div class="pt-16 lg:pt-2">
 
         @foreach ($dates as $date)
             <div
                 class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw] ">
-                <div class="flex justify-between items-center">
+                <div class="flex justify-between items-center mt-2">
                     <form action="/DateUpdate/{{ $date->id }}" method="GET" name="dateUpdate">
                         @csrf
                         @method('PUT')
@@ -55,12 +58,34 @@
                             </div>
                         </h1>
                     </form>
+
+                    <div>
+                        <strong>Rezept verwendet:</strong>
+                        <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center">
+                            @if (isset(App\Models\Recipe::find($date->recipe_id)->image))
+                                @if (App\Models\Recipe::find($date->recipe_id)->image == null)
+                                    <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                        class="w-12 h-12 rounded-lg mr-2">
+                                @else
+                                    <img src="{{ route('display.recipeImage', App\Models\Recipe::find($date->recipe_id)->image) }}"
+                                        alt="" class="w-12 h-12 rounded-lg mr-2">
+                                @endif
+                            @else
+                                <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                    class="w-12 h-12 rounded-lg mr-2">
+                            @endif
+                            {{ App\Models\Recipe::find($date->recipe_id)->title }}
+                        </a>
+                    </div>
+
+
                     <div class="grid grid-cols-2">
 
                         <button type="button"
                             onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
                             '{{ $date->namepraesentiertid }}', '{{ $date->namepraesentiert }}',
-                            '{{ $date->namegekochtid }}', '{{ $date->namegekocht }}' )"
+                            '{{ $date->namegekochtid }}', '{{ $date->namegekocht }}',
+                            '{{ $date->recipe_id }}' )"
                             class="text-left ml-2 mr-2 mb-2 font-sans text-xl font-medium mt-4">
                             <img src="pencil.png" alt="editImg" class="w-5 h-5 opacity-40 hover:opacity-50">
                         </button>
@@ -149,7 +174,8 @@
             </div>
         @endforeach
 
-        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
+        <div
+            class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
             {{ $dates->links() }}
         </div>
 
@@ -161,7 +187,7 @@
                 <!-- Alert title -->
                 <h2 class="text-lg font-bold mb-4">Besprechung bearbeiten</h2>
                 <!-- Update form -->
-                <form action="{{ route('date.update') }}" method="POST" name="updateAllDate">
+                <form action="{{ route('date.update') }}" method="POST">
                     @csrf
                     @method('PATCH')
 
@@ -206,6 +232,21 @@
 
                         </select>
                     </div>
+                    <!-- Select Rezept verwendet -->
+                    <div class="mb-4">
+                        <label for="rezeptSelect" class="block text-sm font-medium text-gray-700">Rezept:</label>
+                        <select id="rezeptSelect" name="rezeptSelect"
+                            class="mt-1 cursor-pointer block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option value="">Verwendetes Rezept auswählen</option>
+
+                            @foreach (App\Models\Recipe::all() as $rezept)
+                                <option value="{{ $rezept->id }}">{{ $rezept->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('rezeptSelect')
+                            <small class="text-sm text-red-500 font-semibold mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
                     <!-- Buttons -->
                     <div class="flex justify-end">
                         <button type="submit"
@@ -217,14 +258,14 @@
                             Cancel
                         </button>
                     </div>
+                    @error('error')
+                        <small class="text-sm text-red-500 font-semibold mt-1">{{ $message }}</small>
+                    @enderror
                 </form>
             </div>
         </div>
 
     </div>
-
-
-    <x-notification />
 
     <script>
         // Obtain the alert
@@ -233,7 +274,7 @@
         const cancelButton = document.getElementById('cancelButton');
 
         // Show alert
-        function showAlert(id, date, personPraesentierenId, personPraesentieren, personKochenId, personKochen) {
+        function showAlert(id, date, personPraesentierenId, personPraesentieren, personKochenId, personKochen, rezeptId) {
 
             document.getElementById('dateId').value = id;
             document.getElementById('dateText').value = date;
@@ -245,6 +286,11 @@
             document.getElementById('actualGekochtId').value = personKochenId;
             document.getElementById('optGekocht').value = personKochenId;
             document.getElementById('optGekocht').text = personKochen;
+
+            if (rezeptId) {
+                document.querySelector('select[id="rezeptSelect"]').querySelector('option[value="' + rezeptId + '"]')
+                    .selected = true;
+            }
 
             editAlert.classList.remove('hidden');
         }
@@ -273,8 +319,7 @@
     </script>
 
     <script>
-        // If there are errors show alert
-        @if ($errors->has('updateAllDate'))
+        @if ($errors->has('dateText') || $errors->has('rezeptSelect') || $errors->has('error'))
             @php
                 $actualPraesentiert = $dates->find(old('dateId'));
                 $actualGekocht = $dates->find(old('dateId'));
@@ -286,7 +331,8 @@
                 '{{ old('actualPraesentiertId') }}',
                 '{{ $actualPraesentiert ? $actualPraesentiert->namepraesentiert : '' }}',
                 '{{ old('actualGekochtId') }}',
-                '{{ $actualGekocht ? $actualGekocht->namegekocht : '' }}'
+                '{{ $actualGekocht ? $actualGekocht->namegekocht : '' }}',
+                '{{ old('rezeptSelect') }}'
             );
         @endif
     </script>
