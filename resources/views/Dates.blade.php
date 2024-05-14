@@ -6,24 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <title>Document</title>
-
-        <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
     <link rel="stylesheet" type="text/css" href="{{asset('style.css?v=').time()}}" />
 </head>
 
 <body class="overflow-y-auto">
     <div
-        class="z-10 p-5 bg-white fixed top-0 lg:w-[120px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1">
+        class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
@@ -37,18 +25,24 @@
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
             class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
-    <div class="pt-16 lg:pt-2">
+
+    
+    <div class="containerVerlauf pt-16 lg:pt-2">
+    <h1 class="verlaufTitel text-center md:text-xl mt-5 mb-5" style="font-size: 2rem;">Verlauf</h1>
 
         @foreach ($dates as $date)
 
-        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw] ">
+
+        <!-- mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw] -->
+
+        <div class="text-center grid grid-cols-1 px-20">
             <div class="flex justify-between items-center">
                 <form action="/DateUpdate/{{$date->id}}" method="GET">
                     @csrf
                     @method('PUT')
                     <h1 class="text-left ml-2 font-sans text-xl font-medium mt-4">
                         Datum:
-                        <input type="text" value="{{$date->date}}" name="date" class=" w-28" />
+                        <input type="text" value="{{$date->date}}" name="date" class=" w-28 rounded-full" />
                         <button class="mr-2">
                             <img src="Save.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
                         </button>
@@ -67,7 +61,7 @@
                     </button>
                 </form>
             </div>
-            <div class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-2 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+            <div class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
                 <h2 class="col-span-2">Praesentiert:</h2>
 
@@ -159,7 +153,7 @@
 
         @endforeach
     </div>
-
+  
 </body>
 
 </html>

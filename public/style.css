@@ -30,12 +30,7 @@ body {
   100% { width: var(--finalSize); opacity: 0; }
 }
 
-/* @keyframes fireworkPseudo {
-  0% { transform: translate(-50%, -50%); width: var(--initialSize); opacity: 1; }
-  50% { width: 0.5vmin; opacity: 1; }
-  100% { width: var(--finalSize); opacity: 0; }
-}
- */
+
 .firework,
 .firework::before,
 .firework::after
@@ -63,12 +58,7 @@ body {
   width: var(--initialSize);
   aspect-ratio: 1;
   background: 
-    /*
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 0% 0%,
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 100% 0%,
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 100% 100%,
-    radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 0% 100%,
-    */
+ 
     
     radial-gradient(circle, var(--color1) var(--particleSize), #0000 0) 50% 0%,
     radial-gradient(circle, var(--color2) var(--particleSize), #0000 0) 100% 50%,
@@ -191,3 +181,92 @@ body {
   display: block;
   
 }
+
+
+.containerVerlauf{
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 80%;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin: auto;
+  position: absolute;
+  margin-left: 20%; 
+
+}
+
+
+
+.navbar{
+  background-color: #f5f5f559;
+}
+
+
+.verlaufTitel{
+  background-color: rgb(249,250,251);
+  padding: 1%;
+  margin: auto;    
+  margin-top: 10px;
+  width: 10rem;
+  border-radius: 32px;
+}
+
+.containerGewinner{
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 70%;
+  /* padding-left: 10%;
+  padding-right: 10%; */
+  margin: auto;
+  /* position: absolute; */
+  margin-left: 16%; 
+
+}
+
+.winnerField{
+  width: 50%;
+  margin: auto;
+  margin-bottom: 2%;
+  padding: 1%;
+}
+
+.gewinnerTitel{
+  background-color: rgb(249,250,251);
+  padding: 1%;
+  margin: auto;   
+  margin-bottom: 2%;
+  margin-top: 3%;
+  width: 12rem;
+  border-radius: 32px;
+}
+
+.cup{
+
+  position: absolute;
+  height: 250px;
+  top: 60%; 
+  right: 83%; 
+  z-index: 2;
+  animation: shakeSlow 3s ease 0.5s infinite alternate;
+  transform-origin: 50% 50%;
+}
+
+@keyframes shakeSlow {
+  0%, 50%, 100% {
+      transform: rotate(-3deg); 
+  }
+  25%, 75% {
+      transform: rotate(3deg); 
+  }
+}
+
+
+/* 
+.containerNames{
+
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 60%;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin: auto;
+  position: absolute;
+  margin-left: 20%; 
+} */
