@@ -179,33 +179,6 @@ class EmployeesController extends Controller
             return redirect('/')->withErrors(['date' => 'ungültiges Datum']);
         }
 
-        // Uncomment this code if the filters below don't work
-        // $random1 = Employee::where('praesentiert', false) //random jemanden zum präsentieren auswählen
-        //     ->where('is_available', true)   // Filter by employees who are available
-        //     ->where('still_working', true)  // Filter by employees who still_working in the office
-        //     ->inRandomOrder()
-        //     ->first();
-        // if ($random1 == null) { //wenn alle praesentiert haben
-        //     $employeesAll = Employee::all();
-        //     for ($i = 0; $i < count($employeesAll); $i++) { //wenn alle praesentiert haben wieder alles auf false setzen
-        //         $employeesAll[$i]->praesentiert = false;
-        //         $employeesAll[$i]->save();
-        //     }
-        // }
-
-        // $random2 = Employee::where('gekocht', false) //gleiches prinzip (nicht in einer schleife gemeinsam falls personen aus der Datenbank gelöscht werden)
-        //     ->where('is_available', true)   // Filter by employees who are available
-        //     ->where('still_working', true)  // Filter by employees who still_working in the office
-        //     ->inRandomOrder()
-        //     ->first();
-        // if ($random2 == null) {
-        //     $employeesAll = Employee::all();
-        //     for ($i = 0; $i < count($employeesAll); $i++) {
-        //         $employeesAll[$i]->gekocht = false;
-        //         $employeesAll[$i]->save();
-        //     }
-        // }
-
         $employeesForPresentation = Employee::where('praesentiert', false)
             ->where('is_available', true)
             ->where('still_working', true)
@@ -260,59 +233,6 @@ class EmployeesController extends Controller
             'random2' => $randomCookingEmployee,
             'datum' => $request->date,
         ]);
-
-
-
-        /*ein Code der sicher funktioniert falls der obere nicht funktionieren sollte*/
-        /*
-        $counter = 0;
-        do {
-
-            $random1 = Name::where('praesentiert', false)
-                ->inRandomOrder()
-                ->first();
-            if ($random1 == null) {
-                $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) {
-                    $names[$i]->praesentiert = false;
-                    $names[$i]->save();
-                }
-                $random1 = Name::where('praesentiert', false)
-                    ->inRandomOrder()
-                    ->first();
-            }
-            $random2 = Name::where('gekocht', false)
-                ->inRandomOrder()
-                ->first();
-            if ($random2 == null) {
-                $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) {
-                    $names[$i]->gekocht = false;
-                    $names[$i]->save();
-                }
-                $random2 = Name::where('gekocht', false)
-                    ->inRandomOrder()
-                    ->first();
-            }
-
-            $counter++;
-            if ($counter > 3) {
-                $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) {
-                    $names[$i]->gekocht = false;
-                    $names[$i]->praesentiert = false;
-                    $names[$i]->save();
-                }
-            }
-        } while (($random1->id) == ($random2->id));
-
-        $random1->praesentiert = true;
-        $random1->save();
-        $random2->gekocht = true;
-        $random2->save();
-        $random1 = $random1->name;
-        $random2 = $random2->name;
-        return view('home', ['random1' => $random1, 'random2' => $random2]);*/
     }
 
     /**
