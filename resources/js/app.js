@@ -1,1 +1,2 @@
-import './bootstrap';
+import './custom/generator';
+// import './bootstrap';

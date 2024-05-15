@@ -7,19 +7,7 @@
 
     <title>Gemeinsames Mittagessen Tool</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
+    @vite('resources/css/app.css') 
     <style>
         .flex-container {
             display: flex;
@@ -29,19 +17,24 @@
         .profile-icon-container {
             margin-left: 5px;
         }
+        
     </style>
 </head>
 
-<body class="">
-
+<body>
+    
     <div
-        class="bg-white p-4 z-20 lg:w-[120px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1">
+        class="p-4 z-20 lg:w-[160px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
 

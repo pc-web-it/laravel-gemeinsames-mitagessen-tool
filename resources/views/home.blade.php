@@ -6,43 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Gemeinsames Mittagessen Tool</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
+
+    @vite('resources/css/app.css')
     <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 
-<body class="">
+<body>
     <div
-        class="p-5 fixed z-10  md:w-[120px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1">
+        class="p-5 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="md:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
         <div class="md:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
         <div class="md:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
 
     <form action="/random" method="GET" class="overflow-hidden">
-
-            <button class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-200 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
+        
+            <button class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-50 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
                 Generate
             </button>
             <h1 class="text-center  ml-2 font-sans text-xl font-medium mt-4">
-            Datum:
-            <input type="text" value="{{$datum}}" name="date" class=" w-28" />
+            Datum: 
+            <input type="text" value="{{$datum}}" name="date" class=" w-28  rounded-full" />
             <div class="text-sm text-red-700 mb-2">
                 @if($errors->any())
                         {{$errors->first('date')}}
@@ -53,7 +47,7 @@
 
     <form action="{{ route('regenerate.data') }}" method="GET" class="text-center mt-4">
         @if(session('showRegenerateButton', false))
-            <button type="submit" class="text-[3vw] md:text-[2vw] font-sans font-medium py-3 px-8 md:w-[40vw] lg:w-[20vw] p-4 rounded-full bg-neutral-200 hover:scale-105 ease-in-out duration-300">
+            <button type="submit" class="text-[3vw] md:text-[2vw] font-sans font-medium py-3 px-8 md:w-[40vw] lg:w-[20vw] p-4 rounded-full bg-neutral-50 hover:scale-105 ease-in-out duration-300">
                 Regenerate
             </button>
             <input  type="hidden" name="date" value="{{ $datum }}">
