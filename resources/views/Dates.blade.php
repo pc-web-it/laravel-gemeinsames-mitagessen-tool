@@ -11,69 +11,96 @@
 
 <body class="overflow-y-auto">
     <div
-        class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
+    class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
+            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
+             <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
+                        class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
+
         <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
+                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
+
     </div>
 
-    
+
     <div class="containerVerlauf pt-16 lg:pt-2">
     <h1 class="verlaufTitel text-center md:text-xl mt-5 mb-5" style="font-size: 2rem;">Verlauf</h1>
 
         @foreach ($dates as $date)
-
-        <div class="text-center grid grid-cols-1 px-20">
-            <div class="flex justify-between items-center">
-            <form action="/DateUpdate/{{ $date->id }}" method="GET" name="dateUpdate">
-                    @csrf
-                    @method('PUT')
-                    <h1 class="text-left ml-2 font-sans text-xl font-medium mt-4">
-                        Datum:
-                        <input type="text" value="{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}"
+            <div
+                class="text-center grid grid-cols-1 px-20">
+                <div class="flex justify-between items-center">
+                    <form action="/DateUpdate/{{ $date->id }}" method="GET" name="dateUpdate">
+                        @csrf
+                        @method('PUT')
+                        <h1 class="text-left ml-2 font-sans text-xl font-medium mt-4">
+                            Datum:
+                            <input type="text" value="{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}"
                                 name="date" class=" w-28 rounded-full" />
-                                <button name="btnSub" class="mr-2 hidden">
-                            <img src="Save.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
-                        </button>
-                        <div class="text-sm text-red-700">
-                            @if($errors->any())
-                                {{$errors->first($date->id)}}
+                            <button name="btnSub" class="mr-2 hidden">
+                                <img src="Save.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
+                            </button>
+                            <div class="text-sm text-red-700">
+                                @if ($errors->any())
+                                    {{ $errors->first($date->id) }}
+                                @endif
+                            </div>
+                        </h1>
+                    </form>
+
+                    <div>
+                        <strong>Rezept verwendet:</strong>
+                        <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center">
+                            @if (isset(App\Models\Recipe::find($date->recipe_id)->image))
+                                @if (App\Models\Recipe::find($date->recipe_id)->image == null)
+                                    <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                        class="w-12 h-12 rounded-lg mr-2">
+                                @else
+                                    <img src="{{ route('display.recipeImage', App\Models\Recipe::find($date->recipe_id)->image) }}"
+                                        alt="" class="w-12 h-12 rounded-lg mr-2">
+                                @endif
+                            @else
+                                <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                    class="w-12 h-12 rounded-lg mr-2">
                             @endif
-                        </div>
-                    </h1>
-                </form>
+                            {{ App\Models\Recipe::find($date->recipe_id)->title }}
+                        </a>
+                    </div>
 
-                <div class="grid grid-cols-2">
+                    <div class="grid grid-cols-2">
 
-<button type="button"
-    onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
-    '{{ $date->namepraesentiertid }}', '{{ $date->namepraesentiert }}',
-    '{{ $date->namegekochtid }}', '{{ $date->namegekocht }}' )"
-    class="text-left ml-2 mr-2 mb-2 font-sans text-xl font-medium mt-4">
-    <img src="pencil.png" alt="editImg" class="w-5 h-5 opacity-40 hover:opacity-50">
-</button>
-                <form action="{{ route('date.destroy', $date->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4" class="ml-2">
-                        <img src="Delete.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
-                    </button>
-                </form>
-            </div>
-        </div>
+                        <button type="button"
+                        onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
+                        '{{ $date->namepraesentiertid }}', '{{ $date->namepraesentiert }}',
+                        '{{ $date->namegekochtid }}', '{{ $date->namegekocht }}',
+                        '{{ $date->recipe_id }}' )"
+                            class="text-left ml-2 mr-2 mb-2 font-sans text-xl font-medium mt-4">
+                            <img src="pencil.png" alt="editImg" class="w-5 h-5 opacity-40 hover:opacity-50">
+                        </button>
 
-            <div class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
-                
-                <h2 class="col-span-2">Praesentiert:</h2>
+                        <form action="{{ route('date.destroy', $date->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+
+                            <button class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
+                                <img src="Delete.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+                <div
+                    class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+
+                    <h2 class="col-span-2">Praesentiert:</h2>
 
                     <div class="col-span-2">
                         <div class="flex items-center">
@@ -143,7 +170,8 @@
             </div>
         @endforeach
 
-        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
+        <div
+            class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
             {{ $dates->links() }}
         </div>
 
@@ -155,7 +183,7 @@
                 <!-- Alert title -->
                 <h2 class="text-lg font-bold mb-4">Besprechung bearbeiten</h2>
                 <!-- Update form -->
-                <form action="{{ route('date.update') }}" method="POST" name="updateAllDate">
+                <form action="{{ route('date.update') }}" method="POST">
                     @csrf
                     @method('PATCH')
 
@@ -200,6 +228,21 @@
 
                         </select>
                     </div>
+                    <!-- Select Rezept verwendet -->
+                    <div class="mb-4">
+                        <label for="rezeptSelect" class="block text-sm font-medium text-gray-700">Rezept:</label>
+                        <select id="rezeptSelect" name="rezeptSelect"
+                            class="mt-1 cursor-pointer block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                            <option value="">Verwendetes Rezept auswählen</option>
+
+                            @foreach (App\Models\Recipe::all() as $rezept)
+                                <option value="{{ $rezept->id }}">{{ $rezept->title }}</option>
+                            @endforeach
+                        </select>
+                        @error('rezeptSelect')
+                            <small class="text-sm text-red-500 font-semibold mt-1">{{ $message }}</small>
+                        @enderror
+                    </div>
                     <!-- Buttons -->
                     <div class="flex justify-end">
                         <button type="submit"
@@ -211,13 +254,17 @@
                             Cancel
                         </button>
                     </div>
+                    @error('error')
+                        <small class="text-sm text-red-500 font-semibold mt-1">{{ $message }}</small>
+                    @enderror
                 </form>
             </div>
         </div>
-        
-        </div>
-        
-        <x-notification />
+
+    </div>
+
+
+
 
     <script>
         // Obtain the alert
@@ -226,7 +273,7 @@
         const cancelButton = document.getElementById('cancelButton');
 
         // Show alert
-        function showAlert(id, date, personPraesentierenId, personPraesentieren, personKochenId, personKochen) {
+        function showAlert(id, date, personPraesentierenId, personPraesentieren, personKochenId, personKochen, rezeptId) {
 
             document.getElementById('dateId').value = id;
             document.getElementById('dateText').value = date;
@@ -238,6 +285,11 @@
             document.getElementById('actualGekochtId').value = personKochenId;
             document.getElementById('optGekocht').value = personKochenId;
             document.getElementById('optGekocht').text = personKochen;
+
+            if (rezeptId) {
+                document.querySelector('select[id="rezeptSelect"]').querySelector('option[value="' + rezeptId + '"]')
+                    .selected = true;
+            }
 
             editAlert.classList.remove('hidden');
         }
@@ -266,8 +318,7 @@
     </script>
 
     <script>
-        // If there are errors show alert
-        @if ($errors->has('updateAllDate'))
+        @if ($errors->has('dateText') || $errors->has('rezeptSelect') || $errors->has('error'))
             @php
                 $actualPraesentiert = $dates->find(old('dateId'));
                 $actualGekocht = $dates->find(old('dateId'));
@@ -279,7 +330,8 @@
                 '{{ old('actualPraesentiertId') }}',
                 '{{ $actualPraesentiert ? $actualPraesentiert->namepraesentiert : '' }}',
                 '{{ old('actualGekochtId') }}',
-                '{{ $actualGekocht ? $actualGekocht->namegekocht : '' }}'
+                '{{ $actualGekocht ? $actualGekocht->namegekocht : '' }}',
+                '{{ old('rezeptSelect') }}'
             );
         @endif
     </script>
@@ -297,7 +349,7 @@
             });
         });
     </script>
-   
+
 
 </body>
 

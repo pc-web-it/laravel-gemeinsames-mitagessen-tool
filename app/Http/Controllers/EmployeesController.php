@@ -18,18 +18,37 @@ use Illuminate\Support\Facades\Response;
 
 class EmployeesController extends Controller
 {
-    public function displayImage($fileName)
+    /**
+     * Function to display the employee profile image
+     *
+     * @param string $filePath The name of the file
+     *
+     */
+    public function displayImage($filePath)
     {
+        // Get the full path to the image file
+        $imagePath = storage_path('app/' . $filePath);
 
-        $imagePath = storage_path('app/' . $fileName);
+        // Check if the file exists
+        if (!file_exists($imagePath)) {
+            abort(404);
+        }
 
+        // Determine the content type of the file
+        $contentType = mime_content_type($imagePath);
+
+        // Set headers based on the content type
         $headers = [
-            'Content-Type' => 'image/jpeg',
+            'Content-Type' => $contentType,
         ];
 
-        return Response::file($imagePath, $headers);
+        // Return the response with the file and headers
+        return response()->file($imagePath, $headers);
     }
 
+    /**
+     * Function to list all employees
+     */
     public function list()
     {
         // Order by the last name of Employee and adding a simplePaginate (max 8 employees for page)
@@ -40,13 +59,14 @@ class EmployeesController extends Controller
         return view('Names', ['names' => $employees]);
     }
 
-    public function create()
-    {
-        return view('Names');
-    }
-
+    /**
+     * Function to store the new employee
+     *
+     * @param Request $request
+     */
     public function store(Request $request) // Neuen Eintrag in Datenbank
     {
+        // Validate
         $validator = Validator::make($request->all(), [
             'name' => [
                 'required',
@@ -61,6 +81,14 @@ class EmployeesController extends Controller
         Employee::create($validated);
         return redirect('Namen');
     }
+
+    /**
+     * Function to update an employee
+     *
+     * @param int $id The employee's id
+     * @param Request $request
+     *
+     */
     public function update($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -107,26 +135,42 @@ class EmployeesController extends Controller
     }
 
 
-
-    public function delete($id) //Person löschen
+    /**
+     * Function to 'delete' an employee
+     *
+     * @param int $id The employee's id
+     *
+     */
+    public function delete($id)
     {
 
         $employee = Employee::find($id);
-        if (File::exists(storage_path('/app/public/' . $employee->file_hash))) { //Profilbild mit löschen
+        if (File::exists(storage_path('/app/public/' . $employee->file_hash))) { // Delete profile picture with
             File::delete(storage_path('/app/public/' . $employee->file_hash));
         }
-        $employee->still_working = 0;
+
+        $employee->still_working = 0; // Set the employee to disabled (This is to use the employee in the recipes even if it is 'deleted')
         $employee->save();
+
         return redirect('Namen');
     }
 
+    /**
+     * Generator page function
+     */
     public function home()
     {
         $datum = Carbon::now()->format('d.m.Y');
         session()->forget('showRegenerateButton');
         return view('home', ['random1' => null, 'random2' => null, 'datum' => $datum]);
     }
-    public function random(Request $request) //möglichst zufällig jemanden auswählen
+
+    /**
+     * Function to generate 2 random employees, one for cooking and other for present
+     *
+     * @param Request $request
+     */
+    public function random(Request $request) // möglichst zufällig jemanden auswählen
     {
         $validator = Validator::make($request->all(), [
             'date' => ['required', 'max:10', 'date'],
@@ -134,33 +178,6 @@ class EmployeesController extends Controller
         if ($validator->fails()) {
             return redirect('/')->withErrors(['date' => 'ungültiges Datum']);
         }
-
-
-        // $random1 = Employee::where('praesentiert', false) //random jemanden zum präsentieren auswählen
-        //     ->where('is_available', true)   // Filter by employees who are available
-        //     ->where('still_working', true)  // Filter by employees who still_working in the office
-        //     ->inRandomOrder()
-        //     ->first();
-        // if ($random1 == null) { //wenn alle praesentiert haben
-        //     $employeesAll = Employee::all();
-        //     for ($i = 0; $i < count($employeesAll); $i++) { //wenn alle praesentiert haben wieder alles auf false setzen
-        //         $employeesAll[$i]->praesentiert = false;
-        //         $employeesAll[$i]->save();
-        //     }
-        // }
-
-        // $random2 = Employee::where('gekocht', false) //gleiches prinzip (nicht in einer schleife gemeinsam falls personen aus der Datenbank gelöscht werden)
-        //     ->where('is_available', true)   // Filter by employees who are available
-        //     ->where('still_working', true)  // Filter by employees who still_working in the office
-        //     ->inRandomOrder()
-        //     ->first();
-        // if ($random2 == null) {
-        //     $employeesAll = Employee::all();
-        //     for ($i = 0; $i < count($employeesAll); $i++) {
-        //         $employeesAll[$i]->gekocht = false;
-        //         $employeesAll[$i]->save();
-        //     }
-        // }
 
         $employeesForPresentation = Employee::where('praesentiert', false)
             ->where('is_available', true)
@@ -174,7 +191,7 @@ class EmployeesController extends Controller
         // If there are not enough people to present or prepare, reset all values
         if (((count($employeesForPresentation) === 1 && count($employeesForCooking) === 1) &&
                 ($employeesForPresentation->first()->id === $employeesForCooking->first()->id))
-                || (count($employeesForPresentation) < 1 || count($employeesForCooking) < 1)
+            || (count($employeesForPresentation) < 1 || count($employeesForCooking) < 1)
         ) {
             Employee::query()->update(['praesentiert' => false, 'gekocht' => false]);
             $employeesForPresentation = Employee::where('praesentiert', false)
@@ -216,64 +233,16 @@ class EmployeesController extends Controller
             'random2' => $randomCookingEmployee,
             'datum' => $request->date,
         ]);
-
-
-
-        /*ein Code der sicher funktioniert falls der obere nicht funktionieren sollte*/
-        /*
-        $counter = 0;
-        do {
-
-            $random1 = Name::where('praesentiert', false)
-                ->inRandomOrder()
-                ->first();
-            if ($random1 == null) {
-                $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) {
-                    $names[$i]->praesentiert = false;
-                    $names[$i]->save();
-                }
-                $random1 = Name::where('praesentiert', false)
-                    ->inRandomOrder()
-                    ->first();
-            }
-            $random2 = Name::where('gekocht', false)
-                ->inRandomOrder()
-                ->first();
-            if ($random2 == null) {
-                $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) {
-                    $names[$i]->gekocht = false;
-                    $names[$i]->save();
-                }
-                $random2 = Name::where('gekocht', false)
-                    ->inRandomOrder()
-                    ->first();
-            }
-
-            $counter++;
-            if ($counter > 3) {
-                $names = Name::all();
-                for ($i = 0; $i < count($names); $i++) {
-                    $names[$i]->gekocht = false;
-                    $names[$i]->praesentiert = false;
-                    $names[$i]->save();
-                }
-            }
-        } while (($random1->id) == ($random2->id));
-
-        $random1->praesentiert = true;
-        $random1->save();
-        $random2->gekocht = true;
-        $random2->save();
-        $random1 = $random1->name;
-        $random2 = $random2->name;
-        return view('home', ['random1' => $random1, 'random2' => $random2]);*/
     }
 
-
+    /**
+     * Function to regenerate the 2 employees if the first generation has not been to your liking
+     *
+     * @param Request $request
+     */
     public function regenerateData(Request $request)
     {
+        // Validation
         $validator = Validator::make($request->all(), [
             'date' => ['required', 'date_format:d.m.Y'],
         ]);
@@ -297,11 +266,11 @@ class EmployeesController extends Controller
 
         do {
             $random2 = Employee::where('gekocht', false)
-            ->where('is_available', true)
-            ->where('still_working', true)
-            ->inRandomOrder()
-            ->first();
-        }while($random1->id == $random2->id);
+                ->where('is_available', true)
+                ->where('still_working', true)
+                ->inRandomOrder()
+                ->first();
+        } while ($random1->id == $random2->id);
 
         if ($random2 == null || $random2 == $random1) {
             $employeesAll = Employee::all();
@@ -347,7 +316,13 @@ class EmployeesController extends Controller
     }
 
 
-
+    /**
+     * Upload profile picture function
+     *
+     * @param int $id The employee's id
+     * @param Request $request
+     *
+     */
     public function upload($id, Request $request) //Profilbild hochladen
     {
         $employee = Employee::find($id);

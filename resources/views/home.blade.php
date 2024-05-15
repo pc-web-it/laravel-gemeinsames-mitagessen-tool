@@ -13,29 +13,31 @@
 
 <body>
     <div
-        class="p-5 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
+    class="p-5 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
         <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="md:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="md:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
+        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
-        <div class="md:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
+                <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
+                    <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
+                        class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
+                <div class="md:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
                 class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
 
     <form action="/random" method="GET" class="overflow-hidden">
-        
+
             <button class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-50 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
                 Generate
             </button>
             <h1 class="text-center  ml-2 font-sans text-xl font-medium mt-4">
-            Datum: 
+            Datum:
             <input type="text" value="{{$datum}}" name="date" class=" w-28  rounded-full" />
             <div class="text-sm text-red-700 mb-2">
                 @if($errors->any())
