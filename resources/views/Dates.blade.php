@@ -1,42 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <title>Gemeinsames Mittagessen Tool</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('style.css?v=').time()}}" />
-</head>
-
-<body class="overflow-y-auto">
-    <div
-    class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
-        <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
-             <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
-                        class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
-
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
-
-    </div>
+<x-layout>
 
 
     <div class="containerVerlauf pt-16 lg:pt-2">
-    <h1 class="verlaufTitel text-center md:text-xl mt-5 mb-5" style="font-size: 2rem;">Verlauf</h1>
+        <h1 class="verlaufTitel text-center md:text-xl mt-5 mb-5" style="font-size: 2rem;">Verlauf</h1>
 
         @foreach ($dates as $date)
-            <div
-                class="text-center grid grid-cols-1 px-20">
+            <div class="text-center grid grid-cols-1 px-20">
                 <div class="flex justify-between items-center">
                     <form action="/DateUpdate/{{ $date->id }}" method="GET" name="dateUpdate">
                         @csrf
@@ -58,27 +27,29 @@
 
                     <div>
                         <strong>Rezept verwendet:</strong>
-                        <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center">
-                            @if (isset(App\Models\Recipe::find($date->recipe_id)->image))
-                                @if (App\Models\Recipe::find($date->recipe_id)->image == null)
+                        @if ($date->recipe_id != null && $date->recipe_id != 0)
+                            <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center">
+                                @if (isset(App\Models\Recipe::find($date->recipe_id)->image))
+                                    @if (App\Models\Recipe::find($date->recipe_id)->image == null)
+                                        <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                            class="w-12 h-12 rounded-lg mr-2">
+                                    @else
+                                        <img src="{{ route('display.recipeImage', App\Models\Recipe::find($date->recipe_id)->image) }}"
+                                            alt="" class="w-12 h-12 rounded-lg mr-2">
+                                    @endif
+                                @else
                                     <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
                                         class="w-12 h-12 rounded-lg mr-2">
-                                @else
-                                    <img src="{{ route('display.recipeImage', App\Models\Recipe::find($date->recipe_id)->image) }}"
-                                        alt="" class="w-12 h-12 rounded-lg mr-2">
                                 @endif
-                            @else
-                                <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
-                                    class="w-12 h-12 rounded-lg mr-2">
-                            @endif
-                            {{ App\Models\Recipe::find($date->recipe_id)->title }}
-                        </a>
+                                {{ App\Models\Recipe::find($date->recipe_id)->title }}
+                            </a>
+                        @endif
                     </div>
 
                     <div class="grid grid-cols-2">
 
                         <button type="button"
-                        onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
+                            onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
                         '{{ $date->namepraesentiertid }}', '{{ $date->namepraesentiert }}',
                         '{{ $date->namegekochtid }}', '{{ $date->namegekocht }}',
                         '{{ $date->recipe_id }}' )"
@@ -170,8 +141,7 @@
             </div>
         @endforeach
 
-        <div
-            class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
+        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
             {{ $dates->links() }}
         </div>
 
@@ -350,7 +320,4 @@
         });
     </script>
 
-
-</body>
-
-</html>
+</x-layout>
