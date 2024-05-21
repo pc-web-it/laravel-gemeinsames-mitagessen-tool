@@ -1,67 +1,228 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<a name="readme-top"></a>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+
+<!-- PROJECT LOGO -->
+
+<br  />
+
+<div  align="center">
+
+<a  href="https://www.pc-web.at/">
+
+<img  src="https://pc-web.space.pc-web.cloud/images/News-Fotos/_1200x630_crop_center-center_82_none_ns/pc-web.jpg?v=1713349612"  alt="Logo"  width="300"  height="200">
+
+</a>
+
+  
+
+<h3  align="center">Gemeinsames Mittagessen Tool</h3>
+
+  
+
+<p  align="center">
+
+<br />
+
+<a href="https://www.pc-web.at/"><strong>See our website »</strong></a>
+
+<br />
+
+<br />
+
 </p>
 
-## About Laravel
+</div>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+      <li><a href="#key-features">Key Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#developers">Developers</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-## Learning Laravel
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-## Laravel Sponsors
+### Gemeinsames Mittagessen Tool
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+The "Gemeinsames Mittagessen Tool" is designed to facilitate the organization of monthly lunch meetings within a company. The main feature of the project is to randomly select two employees from a stored list: one employee to cook and another to present at the monthly meeting. This helps in engaging employees and promoting teamwork and interaction.
 
-### Premium Partners
+### Key Features
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+1. **Employee Selection for Monthly Meetings**:
+   - Randomly selects one employee to cook and another to present at the monthly lunch meeting from the list of employees.
 
-## Contributing
+2. **Lucky Wheel**:
+   - A fun "lucky wheel" feature allows for selecting "x" number of winners from a list of names imported in .csv format. This can be used for various purposes such as raffles, prize distributions, or any other random selection needs.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. **Recipe Management**:
+   - Maintains a list of recipes associated with each monthly meeting. This feature allows employees to view and share recipes, fostering a culture of sharing and collaboration.
 
-## Code of Conduct
+### How It Works
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Employee Selection**:
+  - The tool ensures that the same employee is not chosen for both cooking and presenting unless there are insufficient employees available. It also handles cases where there are not enough employees to make a selection by providing appropriate feedback.
 
-## Security Vulnerabilities
+- **Lucky Wheel**:
+  - Users can import a list of names from a .csv file and use the "lucky wheel" to randomly select winners. This adds an element of excitement and fun to the process of random selection.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **Recipe Listing**:
+  - Recipes can be added, viewed, and managed for each meeting. This helps in documenting and sharing culinary ideas among employees.
 
-## License
+The "Gemeinsames Mittagessen Tool" aims to enhance employee interaction and engagement through organized and enjoyable monthly meetings, while also providing additional features that can be used for various other purposes within the organization.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
- 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+### Built With
+
+The frameworks used in this proyect are:
+
+* [![Tailwind][Tailwind.com]][Tailwind-url]
+* [![Laravel][Laravel.com]][Laravel-url]
+
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+To start using this project you will need to do the following:
+
+### Prerequisites
+
+Before you begin, ensure you have met the following requirements:
+
+- **Docker**: Docker is used to containerize the application. You need to have Docker installed on your machine.
+  - [Docker Installation Guide](https://docs.docker.com/get-docker/)
+
+- **Docker Compose**: Docker Compose is used to manage multi-container Docker applications.
+  - [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
+
+- **PHP**: PHP is required for Laravel development and for running artisan commands locally (if needed).
+  - [PHP Installation Guide](https://www.php.net/manual/en/install.php)
+
+- **Laravel**: Laravel framework is used for building the application.
+  - You can use Composer to install Laravel dependencies once you have PHP and Composer installed.
+  - [Composer Installation Guide](https://getcomposer.org/doc/00-intro.md)
+
+Ensure these prerequisites are met before setting up and running the project.
+
+### Installation
+
+_Once you have the prerequisites installed you will have to do the following:_
+
+1. Clone the repo
+   ```sh
+   git clone https://github.com/pc-web-it/laravel-gemeinsames-mitagessen-tool.git
+   ```
+
+   And go to laravel-gemeinsames-mitagessen-tool
+    ```sh
+   cd laravel-gemeinsames-mitagessen-tool
+   ```
+
+2. Enter in `.env.example`:
+  Configurate the connection to your database
+   ```sh
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=laravel
+    DB_USERNAME=root
+    DB_PASSWORD=
+   ```
+
+   Then add the initial password to log in in the proyect:
+   ```sh
+    INITIAL_ADMIN_PASSWORD=password
+   ```
+3. Go to the terminal and copy the `.env.example` into `.env`
+   ```sh
+   cp .env.example .env
+   ```
+
+4. Start the docker
+    ```sh
+        start
+    ```
+
+5. Enter to the docker shell
+    ```sh
+        shell app
+    ```
+6. Install all the required packages
+    ```sh
+        composer install
+    ```
+
+7. Finally generate the key
+    ```sh
+        php artisan key:generate
+    ```
+
+Your project should be running into localhost:8080.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+_To know how to usage of the project, please refer to the [Documentation](https://example.com)_
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+<!-- DEVELOPERS -->
+## Developers
+
+- **Viktoria Dudina**: [LinkedIn](https://www.linkedin.com/in/viktoria-dudina-56597429a) | [GitHub](https://github.com/ViktoriaDudina)
+- **Juan Antonio Aragón**: [LinkedIn](https://www.linkedin.com/in/23juanan) | [GitHub](https://github.com/juanan04)
+
+<!-- CONTACT -->
+## Contact
+
+Pc-Web - [@pc_web_it](https://www.instagram.com/pc_web_it/) - support@pc-web.at
+
+Project Link: [https://github.com/pc-web-it/laravel-gemeinsames-mitagessen-tool](https://github.com/pc-web-it/laravel-gemeinsames-mitagessen-tool)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[product-screenshot]: images/screenshot.png
+[Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
+[Laravel-url]: https://laravel.com
+[Tailwind.com]: https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white
+[Tailwind-url]: https://tailwindcss.com/
