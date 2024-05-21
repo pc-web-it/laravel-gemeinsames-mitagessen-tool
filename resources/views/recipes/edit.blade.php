@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gemeinsames Mittagessen Tool - Recipes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
+<x-layout>
     <div class="max-w-lg mx-auto mt-8">
         <form action="/recipes/{{ $recipe->id }}" method="POST" enctype="multipart/form-data"
             class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -46,7 +35,8 @@
                     id="employee_id" name="employee_id">
                     <option value="">Select a employee</option>
                     @foreach ($employees as $employee)
-                        <option value="{{ $employee->id }}" {{ $recipe->employee_id == $employee->id ? 'selected' : '' }}>
+                        <option value="{{ $employee->id }}"
+                            {{ $recipe->employee_id == $employee->id ? 'selected' : '' }}>
                             {{ $employee->name }}</option>
                     @endforeach
                 </select>
@@ -85,6 +75,5 @@
             </div>
         </form>
     </div>
-</body>
 
-</html>
+</x-layout>

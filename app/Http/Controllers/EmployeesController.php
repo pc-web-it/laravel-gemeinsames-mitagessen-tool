@@ -188,6 +188,15 @@ class EmployeesController extends Controller
             ->where('still_working', true)
             ->get();
 
+        $employeesAvailable = count(Employee::where('is_available', true)
+                                            ->where('still_working', true)
+                                            ->get());
+        if ($employeesAvailable <= 1)
+        {
+            return redirect('/')->withErrors(['no_employees' => 'There are not enough employees to carry out the generation']);
+        }
+
+
         // If there are not enough people to present or prepare, reset all values
         if (((count($employeesForPresentation) === 1 && count($employeesForCooking) === 1) &&
                 ($employeesForPresentation->first()->id === $employeesForCooking->first()->id))

@@ -1,27 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gemeinsames Mittagessen Tool - Recipes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-
-<body>
+<x-layout>
     <div class="max-w-4xl mx-auto mt-8 px-4">
         <div class="flex justify-between items-center mb-4">
             <a href="/recipes" class="text-blue-500 hover:text-blue-800 font-bold text-sm"> <-- Zurückkehren</a>
-            @if (isset($recipe->image))
-                @if ($recipe->image == null)
-                    <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt="" class="w-32 h-32">
-                @else
-                    <img src="{{ route('display.recipeImage', $recipe->image) }}" alt="" class="w-32 h-32">
-                @endif
-            @else
-                <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt="" class="w-32 h-32">
-            @endif
+                    @if (isset($recipe->image))
+                        @if ($recipe->image == null)
+                            <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt="" class="w-32 h-32">
+                        @else
+                            <img src="{{ route('display.recipeImage', $recipe->image) }}" alt="" class="w-32 h-32">
+                        @endif
+                    @else
+                        <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt="" class="w-32 h-32">
+                    @endif
         </div>
         <div class="flex items-center mb-4">
             <div>
@@ -62,6 +51,5 @@
             </form>
         </div>
     </div>
-</body>
 
-</html>
+</x-layout>

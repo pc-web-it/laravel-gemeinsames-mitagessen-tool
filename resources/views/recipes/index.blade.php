@@ -1,53 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gemeinsames Mittagessen Tool</title>
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        .flex-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .profile-icon-container {
-            margin-left: 5px;
-        }
-    </style>
-</head>
-
-<body class="">
-
-    <div
-        class="bg-white p-4 z-20 lg:w-[120px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1">
-        <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Recipes"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
-
-    </div>
+<x-layout>
 
     <div class="overflow-y-auto pb-10">
         <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[30vw] lg:w-[40vw]">
@@ -82,17 +33,17 @@
 
                     @if ($recipe->pdf_path)
                         <a href="{{ route('display.pdf', $recipe->pdf_path) }}" target="_blank">
-                            <img src="{{ asset('pdf.png') }}" alt="" class="col-span-1 ml-8 w-6 h-6 opacity-40 hover:opacity-50"/>
+                            <img src="{{ asset('pdf.png') }}" alt=""
+                                class="col-span-1 ml-8 w-6 h-6 opacity-40 hover:opacity-50" />
                         </a>
                     @endif
 
                     <a href="/recipes/{{ $recipe->id }}">
-                        <img src="eye.png" alt="" class="col-span-1 ml-4 w-6 h-6 opacity-40 hover:opacity-50"/>
+                        <img src="eye.png" alt=""
+                            class="col-span-1 ml-4 w-6 h-6 opacity-40 hover:opacity-50" />
                     </a>
                 </div>
             @endforeach
         </div>
 
-</body>
-
-</html>
+</x-layout>

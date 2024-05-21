@@ -53,7 +53,6 @@ class DatesController extends Controller
         // Validate
         $request->validate([
             'dateText' => ['required', 'max:10', 'date_format:d.m.Y'],
-            'rezeptSelect' => ['required']
         ]);
 
         // Call functions to update the personPraesentieren and Kochen
@@ -62,6 +61,7 @@ class DatesController extends Controller
 
         // Update the date
         $date->date = Carbon::createFromFormat('d.m.Y', request('dateText'))->toDateString();
+        $date->recipe_id = request()->rezeptSelect;
         $date->save();
 
         // Return to the form

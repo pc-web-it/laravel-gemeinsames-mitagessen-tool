@@ -1,46 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Gemeinsames Mittagessen Tool</title>
-
-    @vite('resources/css/app.css')
-    <style>
-        .flex-container {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .profile-icon-container {
-            margin-left: 5px;
-        }
-
-    </style>
-</head>
-
-<body>
-
-    <div
-        class="p-4 z-20 lg:w-[160px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
-        <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-                <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
-                    <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
-                        class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
-
-    </div>
+<x-layout>
 
     <div class="overflow-y-auto pb-10">
         <form action="/Namen" method="POST" class="mt-2 lg:mt-0">
@@ -58,15 +16,15 @@
                     @endif
                 </div>
                 <!--
-            @if ($errors->any())
-<div class="text-sm text-red-600 absolute top-[70px] z-10 right-0 left-0">
-                <ul>
-                    @foreach ($errors->all() as $error)
-<li>{{ $error }}</li>
-@endforeach
-                </ul>
-            </div>
-@endif-->
+                @if ($errors->any())
+                    <div class="text-sm text-red-600 absolute top-[70px] z-10 right-0 left-0">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif-->
             </div>
 
         </form>
@@ -148,35 +106,36 @@
             </div>
         </div>
 
+    </div>
 
-        <script>
-            // Save and ZZZ button appear or disappear logic in update form
-            const forms = document.querySelectorAll('form[name="updateForm"]');
+    <script>
+        // Save and ZZZ button appear or disappear logic in update form
+        const forms = document.querySelectorAll('form[name="updateForm"]');
 
-            forms.forEach(form => {
-                const inputText = form.querySelector('input[type="text"]');
-                const submitButton = form.querySelector('button[type="submit"]');
-                const zzzImg = form.querySelector('img[id^="zzzImg"]');
-                const zzzCheck = form.querySelector('input[type="checkbox"]');
+        forms.forEach(form => {
+            const inputText = form.querySelector('input[type="text"]');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const zzzImg = form.querySelector('img[id^="zzzImg"]');
+            const zzzCheck = form.querySelector('input[type="checkbox"]');
 
-                inputText.addEventListener('focus', function() {
-                    submitButton.classList.remove('hidden');
-                    zzzImg.classList.remove('hidden');
-                    zzzImg.classList.add('cursor-pointer', 'hover:opacity-40');
-                    zzzImg.src = zzzCheck.checked ? "zzz-green.png" :"zzz.png"; // Change img color depends if the user is available or not
+            inputText.addEventListener('focus', function() {
+                submitButton.classList.remove('hidden');
+                zzzImg.classList.remove('hidden');
+                zzzImg.classList.add('cursor-pointer', 'hover:opacity-40');
+                zzzImg.src = zzzCheck.checked ? "zzz-green.png" :
+                    "zzz.png"; // Change img color depends if the user is available or not
 
-                    zzzImg.addEventListener('click', function() {
-                        if (zzzImg.src.includes('zzz.png')) {
-                            zzzImg.src = "zzz-green.png";
-                        } else if (zzzImg.src.includes('zzz-green.png')) {
-                            zzzImg.src = "zzz.png";
-                        }
-                    });
+                zzzImg.addEventListener('click', function() {
+                    if (zzzImg.src.includes('zzz.png')) {
+                        zzzImg.src = "zzz-green.png";
+                    } else if (zzzImg.src.includes('zzz-green.png')) {
+                        zzzImg.src = "zzz.png";
+                    }
                 });
-
-
             });
-        </script>
-</body>
 
-</html>
+
+        });
+    </script>
+
+</x-layout>
