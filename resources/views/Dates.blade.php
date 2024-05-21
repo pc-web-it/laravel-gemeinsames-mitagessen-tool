@@ -82,6 +82,9 @@
                 <div
                     class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
+
+
+                <div class="flex items-center">
                     <h2 class="col-span-2 mt-5">Praesentiert:</h2>
 
                     <div class="col-span-2 mt-5">
@@ -112,9 +115,9 @@
                                 class="w-5 h-5 mt-7 col-span-1 opacity-40 hover:opacity-60 cursor-pointer" />
                         </button>
                     </form>
+                    </div>
 
-
-
+                <div class="flex items-center">
                     <h2 class="col-span-2 mt-5">Gekocht:</h2>
 
                     <div class="col-span-2 mt-5">
@@ -148,7 +151,7 @@
                         </button>
                     </form>
 
-
+                </div>
                     <!-- place-content-end -->
 
                     <div class="grid gap-20 col-span-3 col-start-[5]  mt-10 mb-3 ">
