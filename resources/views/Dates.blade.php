@@ -1,37 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
-    <title>Gemeinsames Mittagessen Tool</title>
-    <link rel="stylesheet" type="text/css" href="{{asset('style.css?v=').time()}}" />
-</head>
-
-<body class="overflow-y-auto">
-  
-<div
-        class="z-10 p-5 fixed top-0 lg:w-[180px] text-center justify-normal left-0 right-0 lg:text-left grid grid-cols-4 lg:grid-cols-1 rounded-lg">
-        <div class="text-center hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
-        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Rezepte</a></div>
-        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
-    </div>
+<x-layout>
 
 
     <div class="containerVerlauf pt-16 lg:pt-2">
-    <h1 class="verlaufTitel text-center md:text-xl mt-5 mb-5" style="font-size: 2rem;">Verlauf</h1>
+        <h1 class="verlaufTitel text-center md:text-xl mt-5 mb-5" style="font-size: 2rem;">Verlauf</h1>
 
         @foreach ($dates as $date)
             <div
@@ -60,7 +31,7 @@
                     <div class="grid grid-cols-2">
 
                         <button type="button"
-                        onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
+                            onclick="showAlert( {{ $date->id }}, '{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}',
                         '{{ $date->namepraesentiertid }}', '{{ $date->namepraesentiert }}',
                         '{{ $date->namegekochtid }}', '{{ $date->namegekocht }}',
                         '{{ $date->recipe_id }}' )"
@@ -363,7 +334,4 @@
         });
     </script>
 
-
-</body>
-
-</html>
+</x-layout>

@@ -1,24 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Gemeinsames Mittagessen Tool - Recipes</title>
-    @vite('resources/css/app.css')
-
-    <link rel="stylesheet" type="text/css" href="{{ asset('style.css?v=') . time() }}" /> 
-
-
-</head>
-
-<body>
-    <div class="rezeptContainer max-w-6xl mx-auto mt-8 p-10 bg-white ">
-        <div class="max-w-5xl mx-auto mt-8 ">
+<x-layout>
+<div class="rezeptContainer max-w-6xl mx-auto mt-8 p-10 bg-white ">
+<div class="max-w-5xl mx-auto mt-8 ">
         <div class="flex justify-between items-center mb-4">
-            <a href="/recipes" class="backBtn  font-bold text-lg py-2 px-2 focus:outline-none focus:shadow-outline"> <img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">Zurück</a>
-        
+        <a href="/recipes" class="backBtn  font-bold text-lg py-2 px-2 focus:outline-none focus:shadow-outline"> <img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">Zurück</a>
             @if (isset($recipe->image))
                 @if ($recipe->image == null)
                     <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt="" class="w-32 h-32">
@@ -69,6 +53,5 @@
         </div>
         </div>
     </div>
-</body>
 
-</html>
+</x-layout>
