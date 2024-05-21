@@ -185,13 +185,12 @@ body {
 
 .containerVerlauf{
   background-color: rgba(255, 255, 255, 0.5);
-  max-width: 80%;
-  padding-left: 10%;
-  padding-right: 10%;
+  max-width: 70%;
+  padding-left: 5%;
+  padding-right: 5%;
   margin: auto;
   position: absolute;
-  margin-left: 20%; 
-
+  margin-left: 16%; 
 }
 
 
@@ -224,8 +223,9 @@ body {
 .winnerField{
   width: 50%;
   margin: auto;
-  margin-bottom: 2%;
-  padding: 1%;
+  margin-bottom: 1%;
+  padding-top: 1%;
+  padding-left: 1%;
 }
 
 .gewinnerTitel{
@@ -270,3 +270,90 @@ body {
   position: absolute;
   margin-left: 20%; 
 } */
+
+
+
+.containerRecipes{
+  background-color: rgba(255, 255, 255, 0.5);
+  max-width: 60%;
+  padding-left: 7%;
+  padding-right: 7%;
+  margin: auto;
+  /* position: absolute; */
+  margin-left: 20%; 
+padding-bottom: 3%;
+}
+
+
+.recipesTitel{
+  background-color: rgb(249,250,251);
+  padding: 1%;
+  margin: auto;    
+  margin-top: 2rem;
+
+  width: 10rem;
+  border-radius: 32px;
+}
+
+.newRecipeBtn{
+  background-color: #0ecf3e;
+}
+
+.newRecipeBtn:hover{
+  background-color: #07bd34;
+}
+
+
+
+.svg{
+  max-width: 400px;
+}
+
+
+.imgInside {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+.rezeptTitel{
+  font-size: 2.5rem;
+
+}
+
+.pdfFile{
+
+border-radius: 15px;
+border-color: rgb(82, 25, 216);
+border-width: 2px;
+padding: 5px;
+}
+
+.backBtn{
+  background-color: rgb(255, 255, 255);
+  color: rgb(61,141,240);
+  border-width: 2px;
+  border-color: rgb(61,141,240);
+  border-radius: 24px;
+}
+
+.backBtn:hover{
+  color: rgb(49, 121, 209);
+  border-color: rgb(49, 121, 209);
+}
+
+.rezeptContainer{
+  border-radius: 90px;
+}
+
+
+.neuesRezeptTitel{
+
+  padding: 1%;
+  margin: auto;    
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 32px;
+}
+

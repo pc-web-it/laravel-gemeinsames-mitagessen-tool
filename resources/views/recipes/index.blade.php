@@ -1,18 +1,22 @@
 <x-layout>
 
     <div class="overflow-y-auto pb-10">
-        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[30vw] lg:w-[40vw]">
+        <div class="containerRecipes text-center grid grid-cols-1">
 
-            <a href="/recipes/create" class="fixed top-4 right-4">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+        
+            <h1 class="recipesTitel text-center md:text-xl" style="font-size: 2rem;">Rezepte</h1>
+           
+            <!-- bg-sky-400 hover:bg-cyan-600 -->
+
+            <a href="/recipes/create" class="flex flex-row-reverse">
+                <button class="newRecipeBtn text-white font-bold py-2 px-4 m-5 rounded drop-shadow-xl hover:scale-105 ease-in-out duration-300">
                     New Recipe
                 </button>
             </a>
-
-
             @foreach ($recipes as $recipe)
+            
                 <div
-                    class="flex items-center relative grid grid-cols-6 m-2 py-4 rounded-xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+                    class="flex items-center relative grid grid-cols-6 m-2 py-4  rounded-xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
                     <p class="col-span-3">{{ $recipe->title }}</p>
 
@@ -45,5 +49,10 @@
                 </div>
             @endforeach
         </div>
+
+
+        
+
+        @vite('resources/js/app.js')
 
 </x-layout>

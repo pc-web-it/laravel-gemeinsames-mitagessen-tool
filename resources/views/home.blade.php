@@ -3,13 +3,12 @@
 
     <form action="/random" method="GET" class="overflow-hidden">
 
-        <button
-            class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-50 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
-            Generate
-        </button>
-        <h1 class="text-center  ml-2 font-sans text-xl font-medium mt-4">
+            <button class=" text-[5vw]  font-sans font-medium py-4 px-12 static text-center mt-16 md:mt-10 md:w-[50vw] md:ml-[25vw]  bg-neutral-50 w-[80vw] ml-[10vw] lg:w-[35vw] lg:ml-[32.5vw] p-5 rounded-full hover:scale-105 ease-in-out duration-300">
+                Generate
+            </button>
+            <h1 class="text-center ml-2 font-sans text-xl font-medium mt-4 p-2">
             Datum:
-            <input type="text" value="{{ $datum }}" name="date" class="w-28 rounded-full" />
+            <input type="text" value="{{$datum}}" name="date" class="text-center w-32 p-1 rounded-full" />
             <div class="text-sm text-red-700 mb-2">
                 @if ($errors->any())
                     {{ $errors->first('date') }}

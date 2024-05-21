@@ -28,7 +28,7 @@ return new class extends Migration
             $table->renameColumn('new_date', 'date');
         });
     }
-
+ 
     /**
      * Reverse the migrations.
      */

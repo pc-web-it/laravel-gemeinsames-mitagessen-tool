@@ -137,11 +137,11 @@ class RecipesController extends Controller
             'employee_id' => ['required', 'exists:employees,id'],
             'image' => ['nullable',
                 File::image()
-                    ->max('2mb'),
+                    ->max(2048),
                 ],
             'pdf_path' => ['nullable',
                 File::types('pdf')
-                    ->max('2mb'),
+                    ->max(2048),
                 ],
         ]);
 
