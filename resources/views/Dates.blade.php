@@ -10,24 +10,23 @@
 </head>
 
 <body class="overflow-y-auto">
-    <div
-    class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left  grid grid-cols-4 lg:grid-cols-1 rounded-lg">
-        <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-            <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                    class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
-             <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
-                        class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
-
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
-
+  
+<div
+        class="z-10 p-5 fixed top-0 lg:w-[180px] text-center justify-normal left-0 right-0 lg:text-left grid grid-cols-4 lg:grid-cols-1 rounded-lg">
+        <div class="text-center hover:scale-105 ease-in-out duration-300"><a href="/Namen"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Rezepte</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
 
@@ -36,7 +35,7 @@
 
         @foreach ($dates as $date)
             <div
-                class="text-center grid grid-cols-1 px-20">
+                class="text-center grid grid-cols-1">
                 <div class="flex justify-between items-center">
                     <form action="/DateUpdate/{{ $date->id }}" method="GET" name="dateUpdate">
                         @csrf
@@ -44,11 +43,11 @@
                         <h1 class="text-left ml-2 font-sans text-xl font-medium mt-4">
                             Datum:
                             <input type="text" value="{{ Carbon\Carbon::parse($date->date)->format('d.m.Y') }}"
-                                name="date" class=" w-28 rounded-full" />
+                                name="date" class=" w-28 rounded-full text-center w-32 py-1" />
                             <button name="btnSub" class="mr-2 hidden">
                                 <img src="Save.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
                             </button>
-                            <div class="text-sm text-red-700">
+                            <div class="text-sm text-red-700 ">
                                 @if ($errors->any())
                                     {{ $errors->first($date->id) }}
                                 @endif
@@ -56,24 +55,7 @@
                         </h1>
                     </form>
 
-                    <div>
-                        <strong>Rezept verwendet:</strong>
-                        <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center">
-                            @if (isset(App\Models\Recipe::find($date->recipe_id)->image))
-                                @if (App\Models\Recipe::find($date->recipe_id)->image == null)
-                                    <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
-                                        class="w-12 h-12 rounded-lg mr-2">
-                                @else
-                                    <img src="{{ route('display.recipeImage', App\Models\Recipe::find($date->recipe_id)->image) }}"
-                                        alt="" class="w-12 h-12 rounded-lg mr-2">
-                                @endif
-                            @else
-                                <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
-                                    class="w-12 h-12 rounded-lg mr-2">
-                            @endif
-                            {{ App\Models\Recipe::find($date->recipe_id)->title }}
-                        </a>
-                    </div>
+              
 
                     <div class="grid grid-cols-2">
 
@@ -100,9 +82,9 @@
                 <div
                     class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
-                    <h2 class="col-span-2">Praesentiert:</h2>
+                    <h2 class="col-span-2 mt-5">Praesentiert:</h2>
 
-                    <div class="col-span-2">
+                    <div class="col-span-2 mt-5">
                         <div class="flex items-center">
                             @if (isset($date->praesentiert->file_hash))
                                 @if ($date->praesentiert->file_hash == null)
@@ -127,7 +109,7 @@
 
                         <button type="submit">
                             <img src="Delete.png" alt="deleteImg"
-                                class="w-5 h-5 mt-2 col-span-1 opacity-40 hover:opacity-60 cursor-pointer" />
+                                class="w-5 h-5 mt-7 col-span-1 opacity-40 hover:opacity-60 cursor-pointer" />
                         </button>
                     </form>
 
@@ -151,6 +133,8 @@
                                 {{ $date->namegekocht }}
                             </div>
                         </div>
+
+                      
                     </div>
 
                     <form action="{{ route('date.removeEmployee', ['id' => $date->id, 'isGekocht' => 1]) }}"
@@ -160,9 +144,35 @@
 
                         <button type="submit">
                             <img src="Delete.png" alt="deleteImg"
-                                class="w-5 h-5 col-span-1 mt-5 opacity-40 hover:opacity-60 cursor-pointer" />
+                                class="w-5 h-5 mt-7 col-span-1 opacity-40 hover:opacity-60 cursor-pointer" />
                         </button>
                     </form>
+
+
+                    <!-- place-content-end -->
+
+                    <div class="grid gap-20 col-span-3 col-start-[5]  mt-10 mb-3 ">
+                        <div class="max-w-48 border-dotted border-2 border-indigo-600">
+                            <strong>Rezept verwendet:</strong>
+                            @if ($date->recipe_id != null && $date->recipe_id != 0)
+                            <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center mt-3 mb-2 ml-2">
+                                @if (isset(App\Models\Recipe::find($date->recipe_id)->image))
+                                    @if (App\Models\Recipe::find($date->recipe_id)->image == null)
+                                        <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                            class="w-12 h-12 rounded-lg mr-2">
+                                    @else
+                                        <img src="{{ route('display.recipeImage', App\Models\Recipe::find($date->recipe_id)->image) }}"
+                                            alt="" class="w-12 h-12 rounded-lg mr-2">
+                                    @endif
+                                @else
+                                    <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt=""
+                                        class="w-12 h-12 rounded-lg mr-2">
+                                @endif
+                                {{ App\Models\Recipe::find($date->recipe_id)->title }}
+                            </a>
+                            @endif
+                        </div>
+                    </div>
 
 
                 </div>
@@ -171,7 +181,7 @@
         @endforeach
 
         <div
-            class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[15vw] lg:w-[70vw] 2xl:mx-[20vw] 2xl:w-[60vw]">
+            class="text-center grid grid-cols-1">
             {{ $dates->links() }}
         </div>
 

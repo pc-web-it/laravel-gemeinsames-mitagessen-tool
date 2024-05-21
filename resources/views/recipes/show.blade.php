@@ -6,13 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Gemeinsames Mittagessen Tool - Recipes</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite('resources/css/app.css')
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('style.css?v=') . time() }}" /> 
+
+
 </head>
 
 <body>
-    <div class="max-w-4xl mx-auto mt-8 px-4">
+    <div class="rezeptContainer max-w-6xl mx-auto mt-8 p-10 bg-white ">
+        <div class="max-w-5xl mx-auto mt-8 ">
         <div class="flex justify-between items-center mb-4">
-            <a href="/recipes" class="text-blue-500 hover:text-blue-800 font-bold text-sm"> <-- Zurückkehren</a>
+            <a href="/recipes" class="backBtn  font-bold text-lg py-2 px-2 focus:outline-none focus:shadow-outline"> <img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">Zurück</a>
+        
             @if (isset($recipe->image))
                 @if ($recipe->image == null)
                     <img src="{{ asset('recipesImages/defaultFood.jpg') }}" alt="" class="w-32 h-32">
@@ -25,8 +31,8 @@
         </div>
         <div class="flex items-center mb-4">
             <div>
-                <h1 class="text-2xl font-bold mb-2">{{ $recipe->title }}</h1>
-                <div class="flex items-center mb-2">Author:
+                <h1 class="rezeptTitel text-2xl font-bold mb-5">{{ $recipe->title }}</h1>
+                <div class="flex items-center mb-5 text-xl">Gekocht:
                     <div>
                         @if (isset($employee->file_hash))
                             @if ($employee->file_hash == null)
@@ -44,22 +50,23 @@
                 </div>
             </div>
         </div>
-        <p class="text-lg text-center mb-4">{{ $recipe->description }}</p>
+        <p class="text-xl text-center mb-10">{{ $recipe->description }}</p>
         <div class="flex justify-between">
             @if ($recipe->pdf_path)
                 <a href="{{ route('display.pdf', $recipe->pdf_path) }}" target="_blank">
                     <img src="{{ asset('pdf.png') }}" alt=""
-                        class="col-span-1 ml-8 w-8 h-8 opacity-60 hover:opacity-70" />
+                        class="pdfFile col-span-1 ml-8 w-14 h-14 opacity-60 hover:opacity-70" />
                 </a>
             @endif
             <a href="/recipes/{{ $recipe->id }}/edit"
-                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Bearbeiten</a>
+                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-lg focus:outline-none focus:shadow-outline">Bearbeiten</a>
             <form action="/recipes/{{ $recipe->id }}" method="POST">
                 @csrf
                 @method('DELETE')
                 <button type="submit"
-                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Beseitigen</button>
+                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg focus:outline-none focus:shadow-outline">Löschen</button>
             </form>
+        </div>
         </div>
     </div>
 </body>

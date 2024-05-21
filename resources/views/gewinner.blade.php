@@ -13,19 +13,21 @@
 <body class="overflow-y-auto">
     <!-- Navbar -->
     <div
-        class="z-10 p-5 fixed top-0 lg:w-[160px] text-center justify-normal left-0 right-0 lg:text-left grid grid-cols-4 lg:grid-cols-1 rounded-lg">
-        <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
+        class="z-10 p-5 fixed top-0 lg:w-[180px] text-center justify-normal left-0 right-0 lg:text-left grid grid-cols-4 lg:grid-cols-1 rounded-lg">
+        <div class="text-center hover:scale-105 ease-in-out duration-300"><a href="/Namen"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Rezepte</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
     <!-- Hauptinhalt -->

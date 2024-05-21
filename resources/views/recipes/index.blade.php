@@ -7,20 +7,8 @@
 
     <title>Gemeinsames Mittagessen Tool</title>
 
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        clifford: '#da373d',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
+    @vite('resources/css/app.css')
+    <!-- <style>
         .flex-container {
             display: flex;
             flex-direction: column;
@@ -29,39 +17,48 @@
         .profile-icon-container {
             margin-left: 5px;
         }
-    </style>
+    </style> -->
+      <link rel="stylesheet" type="text/css" href="{{ asset('style.css?v=') . time() }}" /> 
 </head>
 
 <body class="">
 
-    <div
-        class="bg-white p-4 z-20 lg:w-[120px] text-center  justify-normal left-0 right-0 lg:text-left fixed  grid grid-cols-4 lg:grid-cols-1">
-        <div class="hover:scale-105 ease-in-out duration-300"><a href="/Namen"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Recipes"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Recipes</a></div>
-        <div class="lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
-                class=" px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl"> Logout</a></div>
-
+<div
+        class="z-10 p-5 fixed top-0 lg:w-[180px] text-center justify-normal left-0 right-0 lg:text-left grid grid-cols-4 lg:grid-cols-1 rounded-lg">
+        <div class="text-center hover:scale-105 ease-in-out duration-300"><a href="/Namen"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Mitarbeiter</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300"><a href="/"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Generator</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/Verlauf"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Verlauf</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinnspiel"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinnspiel</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/gewinner"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Gewinner</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/recipes"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Rezepte</a></div>
+        <div class="text-center  lg:mt-5 hover:scale-105 ease-in-out duration-300 "><a href="/logout"
+                class="navBtn block px-2 py-1 bg-gray-50 rounded-lg text-lg md:text-xl">Logout</a></div>
     </div>
 
-    <div class="overflow-y-auto pb-10">
-        <div class="text-center grid grid-cols-1 mx-[5vw] w-[90vw] lg:mx-[30vw] lg:w-[40vw]">
 
-            <a href="/recipes/create" class="fixed top-4 right-4">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <div class="overflow-y-auto pb-10">
+        <div class="containerRecipes text-center grid grid-cols-1">
+
+        
+            <h1 class="recipesTitel text-center md:text-xl" style="font-size: 2rem;">Rezepte</h1>
+           
+            <!-- bg-sky-400 hover:bg-cyan-600 -->
+
+            <a href="/recipes/create" class="flex flex-row-reverse">
+                <button class="newRecipeBtn text-white font-bold py-2 px-4 m-5 rounded drop-shadow-xl hover:scale-105 ease-in-out duration-300">
                     New Recipe
                 </button>
             </a>
-
-
             @foreach ($recipes as $recipe)
+            
                 <div
-                    class="flex items-center relative grid grid-cols-6 m-2 py-4 rounded-xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+                    class="flex items-center relative grid grid-cols-6 m-2 py-4  rounded-xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
                     <p class="col-span-3">{{ $recipe->title }}</p>
 
@@ -92,6 +89,11 @@
                 </div>
             @endforeach
         </div>
+
+
+        
+
+        @vite('resources/js/app.js')
 
 </body>
 
