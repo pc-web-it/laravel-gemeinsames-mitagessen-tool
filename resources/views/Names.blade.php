@@ -69,7 +69,7 @@
                         @csrf
                         @method('PATCH')
                         <input id="inputTextName" type="text" value="{{ $name->name }}" name="name"
-                            class="bg-gray-50 w-64" />
+                            class="bg-gray-50 w-32" />
                         <div class="text-sm text-red-700">
                             @if ($errors->any())
                                 {{ $errors->first($name->id) }}

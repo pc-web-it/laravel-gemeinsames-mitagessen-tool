@@ -42,10 +42,9 @@
 
     <!-- Animation -->
 
-    <div>
-        <img class="cup" src="cup.png" alt="cup">
-    </div>
-
+    <div class="flex-container">
+            <img class="cup" src="cup.png" alt="cup">
+        </div>
 
 
     @vite('resources/js/app.js')

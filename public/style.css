@@ -241,9 +241,9 @@ body {
 .cup{
 
   position: absolute;
-  height: 250px;
-  top: 60%; 
-  right: 83%; 
+  height: 200px;
+  top: 6%; 
+  right: 6%; 
   z-index: 2;
   animation: shakeSlow 3s ease 0.5s infinite alternate;
   transform-origin: 50% 50%;
