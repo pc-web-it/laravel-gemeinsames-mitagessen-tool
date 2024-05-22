@@ -165,7 +165,7 @@
             <!-- Alert content -->
             <div class="bg-white rounded-lg shadow-lg p-10 w-96 h-auto">
                 <!-- Alert title -->
-                <h2 class="text-lg font-bold mb-4">Besprechung bearbeiten</h2>
+                <h2 class="text-lg font-bold mb-4">Bearbeiten</h2>
                 <!-- Update form -->
                 <form action="{{ route('date.update') }}" method="POST">
                     @csrf
@@ -186,7 +186,7 @@
                     <div class="mb-4">
                         <input type="hidden" id="actualPraesentiertId" name="actualPraesentiertId" />
                         <label for="praesentiertSelect"
-                            class="block text-sm font-medium text-gray-700">Praesentiert:</label>
+                            class="block text-sm font-medium text-gray-700">Präsentiert:</label>
                         <select id="praesentiertSelect" name="praesentiertSelect"
                             class="mt-1 cursor-pointer block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             <option id="optPraesentiert" selected></option>
