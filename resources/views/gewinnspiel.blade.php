@@ -5,7 +5,7 @@
 
         <div class="container">
             <div class="inner-container">
-                <div class="left-section">
+                <div>
                     <h1 id="randomTitel">Random Name Generator</h1>
                     <form id="numberForm">
                         <label for="numberOfWinners" id="numberLabel">Number of winners:</label>
@@ -27,7 +27,7 @@
                             class="px-4 py-2 bg-indigo-600 text-white rounded-lg">Generate</button>
                     </form>
                 </div>
-                <div class="right-section">
+                <div>
                     <h2 id="randomTitel">Winners</h2>
                     <div id="winners"></div>
                     <form id="winnersArea" action="{{ route('winner.store') }}" method="POST">
@@ -60,13 +60,9 @@
 
         <!-- Animation -->
 
-        <div>
             <img class="giftBox" src="giftBox.png" alt="giftBox">
-        </div>
 
-        <div class="balloonsPlace">
             <img class="balloons" src="balloons.png" alt="balloons">
-        </div>
     </div>
 
 

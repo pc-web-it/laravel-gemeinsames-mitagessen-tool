@@ -13,7 +13,7 @@
 
 <body class="overflow-y-auto">
     <div
-        class="p-5 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
+    class="z-10 p-5 fixed top-0 lg:w-[180px] text-center justify-normal left-0 right-0 lg:text-left grid grid-cols-4 lg:grid-cols-1 rounded-lg">
 
         <x-nav-link href="/Namen">Mitarbeiter</x-nav-link>
 
