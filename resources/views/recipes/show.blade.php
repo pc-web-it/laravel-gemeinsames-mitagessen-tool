@@ -1,5 +1,5 @@
 <x-layout>
-<div class="rezeptContainer max-w-6xl mx-auto mt-8 p-10 bg-white ">
+<div class="rezeptContainer lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl  mx-auto mt-8 p-10 bg-white ">
 <div class="max-w-5xl mx-auto mt-8 ">
         <div class="flex justify-between items-center mb-4">
         <a href="/recipes" class="backBtn  font-bold text-lg py-2 px-2 focus:outline-none focus:shadow-outline"> <img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">Zurück</a>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <p class="text-xl text-center mb-10">{{ $recipe->description }}</p>
+        <p class="text-xl text-center mb-10 text-justify">{{ $recipe->description }}</p>
         <div class="flex justify-between">
             @if ($recipe->pdf_path)
                 <a href="{{ route('display.pdf', $recipe->pdf_path) }}" target="_blank">

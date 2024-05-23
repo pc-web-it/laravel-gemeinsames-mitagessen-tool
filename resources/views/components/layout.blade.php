@@ -13,7 +13,7 @@
 
 <body class="overflow-y-auto">
     <div
-        class="p-5 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
+        class="p-3 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
 
         <x-nav-link href="/Namen">Mitarbeiter</x-nav-link>
 
@@ -25,7 +25,7 @@
 
         <x-nav-link href="/gewinner">Gewinner</x-nav-link>
 
-        <x-nav-link href="/recipes">Recipes</x-nav-link>
+        <x-nav-link href="/recipes">Rezepte</x-nav-link>
 
         <x-nav-link href="/logout">Logout</x-nav-link>
 

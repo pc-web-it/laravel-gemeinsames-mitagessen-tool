@@ -51,11 +51,11 @@
 
                 </div>
                 <div
-                    class="font-sans text-lg font-normal relative grid grid-cols-5 2xl:grid-cols-10 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+                    class="font-sans text-lg font-normal relative flex-wrap flex md:flex-col lg:flex-row justify-between md:space-y-6 lg:space-y-0 md:space-x-0 lg:space-x-6 md:space-x-6 m-3 p-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
 
 
-                <div class="flex items-center">
+                <div class="flex items-center justify-center  ">
                     <h2 class="col-span-2 mt-5">Praesentiert:</h2>
 
                     <div class="col-span-2 mt-5">
@@ -70,7 +70,7 @@
                             @else
                                 <img src="Profil.jpg" alt="" class="ml-8 w-9 h-9 rounded-full z-10">
                             @endif
-                            <div class="ml-10">
+                            <div class="ml-10 mr-2">
                                 {{ $date->namepraesentiert }}
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                             @else
                                 <img src="Profil.jpg" alt="" class="ml-8 w-9 h-9 rounded-full z-10">
                             @endif
-                            <div class="ml-10">
+                            <div class="ml-10  mr-2">
                                 {{ $date->namegekocht }}
                             </div>
                         </div>
@@ -124,9 +124,9 @@
 
                 </div>
                     <!-- place-content-end -->
-
-                    <div class="grid gap-20 col-span-3 col-start-[5]  mt-10 mb-3 ">
-                        <div class="max-w-48 border-dotted border-2 border-indigo-600">
+<!-- grid gap-20 col-span-3 col-start-[5]  mt-10 mb-3  relative flex flex-wrap items-center-->
+                    <div class="flex flex-col items-center justify-center  w-full">
+                        <div class="max-w-48 border-dotted border-2 border-indigo-600 mt-5">
                             <strong>Rezept verwendet:</strong>
                             @if ($date->recipe_id != null && $date->recipe_id != 0)
                             <a href="/recipes/{{ $date->recipe_id }}" class="flex items-center mt-3 mb-2 ml-2">
@@ -165,7 +165,7 @@
             <!-- Alert content -->
             <div class="bg-white rounded-lg shadow-lg p-10 w-96 h-auto">
                 <!-- Alert title -->
-                <h2 class="text-lg font-bold mb-4">Besprechung bearbeiten</h2>
+                <h2 class="text-lg font-bold mb-4">Bearbeiten</h2>
                 <!-- Update form -->
                 <form action="{{ route('date.update') }}" method="POST">
                     @csrf
@@ -186,7 +186,7 @@
                     <div class="mb-4">
                         <input type="hidden" id="actualPraesentiertId" name="actualPraesentiertId" />
                         <label for="praesentiertSelect"
-                            class="block text-sm font-medium text-gray-700">Praesentiert:</label>
+                            class="block text-sm font-medium text-gray-700">Präsentiert:</label>
                         <select id="praesentiertSelect" name="praesentiertSelect"
                             class="mt-1 cursor-pointer block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             <option id="optPraesentiert" selected></option>
