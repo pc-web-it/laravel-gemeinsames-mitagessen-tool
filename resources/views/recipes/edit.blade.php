@@ -71,7 +71,7 @@
                     type="submit">
                     Aktualisieren
                 </button>
-                <a href="/recipes"
+                <a href="/recipes/{{ $recipe->id }}"
                     class="backBtn inline-block align-baseline font-bold text-sm py-2 px-3"><img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">
                     Zurück
                 </a>
