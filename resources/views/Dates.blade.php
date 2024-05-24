@@ -26,7 +26,7 @@
                         </h1>
                     </form>
 
-              
+
 
                     <div class="grid grid-cols-2">
 
@@ -108,7 +108,7 @@
                             </div>
                         </div>
 
-                      
+
                     </div>
 
                     <form action="{{ route('date.removeEmployee', ['id' => $date->id, 'isGekocht' => 1]) }}"

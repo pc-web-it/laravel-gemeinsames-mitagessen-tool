@@ -9,7 +9,7 @@
 
 <a  href="https://www.pc-web.at/">
 
-<img  src="https://pc-web.space.pc-web.cloud/images/News-Fotos/_1200x630_crop_center-center_82_none_ns/pc-web.jpg?v=1713349612"  alt="Logo"  width="300"  height="200">
+<img  src="https://pc-web.space.pc-web.cloud/images/News-Fotos/_1200x630_crop_center-center_82_none_ns/pc-web.jpg?v=1713349612"  alt="Logo"  width="350"  height="200">
 
 </a>
 
@@ -65,7 +65,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://github.com/pc-web-it/laravel-gemeinsames-mitagessen-tool.git)
 
 ### Gemeinsames Mittagessen Tool
 
@@ -197,7 +197,7 @@ Your project should be running into localhost:8080.
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-_To know how to usage of the project, please refer to the [Documentation](https://example.com)_
+_To know how to usage of the project, please refer to the [Documentation](Documentation.pdf)_
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -221,7 +221,7 @@ Project Link: [https://github.com/pc-web-it/laravel-gemeinsames-mitagessen-tool]
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: projectScreenshot.png
 [Laravel.com]: https://img.shields.io/badge/Laravel-FF2D20?style=for-the-badge&logo=laravel&logoColor=white
 [Laravel-url]: https://laravel.com
 [Tailwind.com]: https://img.shields.io/badge/Tailwind-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white
