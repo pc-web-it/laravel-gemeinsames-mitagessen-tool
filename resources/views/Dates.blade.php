@@ -39,11 +39,11 @@
                             <img src="pencil.png" alt="editImg" class="w-5 h-5 opacity-40 hover:opacity-50">
                         </button>
 
-                        <form action="{{ route('date.destroy', $date->id) }}" method="POST">
+                        <form id="delete-form-{{ $date->id }}" action="{{ route('date.destroy', $date->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
 
-                            <button class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
+                            <button type="button" onclick="showConfirmModal('{{ $date->date }}', 'dates', 'delete-form-{{ $date->id }}')" class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
                                 <img src="Delete.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
                             </button>
                         </form>
@@ -81,7 +81,7 @@
                         @csrf
                         @method('PUT')
 
-                        <button type="submit">
+                        <button>
                             <img src="Delete.png" alt="deleteImg"
                                 class="w-5 h-5 mt-7 col-span-1 opacity-40 hover:opacity-60 cursor-pointer" />
                         </button>
@@ -116,7 +116,7 @@
                         @csrf
                         @method('PUT')
 
-                        <button type="submit">
+                        <button>
                             <img src="Delete.png" alt="deleteImg"
                                 class="w-5 h-5 mt-7 col-span-1 opacity-40 hover:opacity-60 cursor-pointer" />
                         </button>
@@ -229,11 +229,11 @@
                     </div>
                     <!-- Buttons -->
                     <div class="flex justify-end">
-                        <button type="submit"
+                        <button
                             class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             Save
                         </button>
-                        <button type="button" id="cancelButton"
+                        <button id="cancelButton"
                             class="ml-2 inline-flex justify-center py-2 px-4 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                             Cancel
                         </button>
@@ -248,7 +248,7 @@
     </div>
 
 
-
+    <x-confirm-alert />
 
     <script>
         // Obtain the alert
