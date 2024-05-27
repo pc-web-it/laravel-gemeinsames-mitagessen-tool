@@ -32,4 +32,13 @@ class LuckyWinnersController extends Controller
 
         return redirect('/gewinner');
     }
+
+    public function destroy($id)
+    {
+        $winner = Winners::findOrFail($id);
+        $winner->delete();
+
+        return redirect('/gewinner')->with('success', 'Winner deleted successfully.');
+    }
+
 }
