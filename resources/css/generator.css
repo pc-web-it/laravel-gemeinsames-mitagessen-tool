@@ -18,8 +18,8 @@ body {
 }
 
 .loginStyle {
-    background: rgb(39, 241, 255);
-    background: linear-gradient(90deg, rgba(48, 235, 255, 0.753) 0%, rgba(132, 112, 255, 0.7497373949579832) 100%);
+    background: rgb(106,80,255);
+    /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(167,152,255,1) 50%, rgba(39,0,255,1) 100%); */
 }
 
 .generatorAndBackground {

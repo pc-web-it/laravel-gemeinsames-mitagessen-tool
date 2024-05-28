@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{asset('style.css?v=').time()}}" />
 
 </head>
-<body>
+<body style="background: rgb(106,80,255);">
 
 <div>
     <div>
@@ -19,11 +19,15 @@
             <button class="absolute top-5 right-5 px-2 py-1 bg-gray-50 rounded-lg text-xl hover:scale-105 ease-in-out duration-300">Logout</button>
         </form>
         @endif
-        <section class="bg-white ">
-            <div class="loginStyle flex flex-col items-center justify-center px-6 py-8 mx-auto ">
+        <section class="bg-white">
+            <div class="loginStyle flex flex-col items-center justify-center px-6 py-24 mx-auto ">
                 <div class="w-full bg-gray-50 rounded-lg drop-shadow-xl  md:mt-0 sm:max-w-md xl:p-0  ">
                     <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                        <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+
+                    <div class="w-40 m-auto"><img src="{{ asset('LOGO_BLACK.png') }}" alt="Logo"></div>
+                     <div class="w-40 m-auto"><img src="{{ asset('CLAIM_COLOR_RGB.png') }}" alt="Claim"></div>
+
+                        <h1 class="text-xl text-center pt-6 font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
                             Login
                         </h1>
                         <form class="space-y-4 md:space-y-6" action="{{ route('authenticate') }}" method="post">
@@ -46,7 +50,7 @@
 
                             </div>
 
-                            <button type="submit" class="w-full text-black bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Submit</button>
+                            <button type="submit" class="w-full text-black bg-gray-300 hover:bg-slate-400 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">Submit</button>
 
                         </form>
                     </div>
