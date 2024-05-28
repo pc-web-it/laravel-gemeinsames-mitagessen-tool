@@ -47,6 +47,7 @@ Route::get('/generate-random-name', [FileUploadController::class, 'generateRando
 
 Route::get('/gewinner', [LuckyWinnersController::class,'index'])->name('gewinner')->middleware('auth');
 Route::put('/gewinner', [LuckyWinnersController::class, 'store'])->name('winner.store')->middleware('auth');
+Route::delete('/gewinner/{winner}', [LuckyWinnersController::class, 'destroy'])->name('winner.destroy')->middleware('auth');
 
 // Routes for Recipes
 Route::get('/recipes', [RecipesController::class, 'index'])->middleware('auth');

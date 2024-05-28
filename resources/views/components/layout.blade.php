@@ -14,6 +14,8 @@
 <body class="overflow-y-auto">
     <div
         class="p-3 fixed z-10 md:w-[160px] text-center justify-normal left-0 right-0 md:text-left  grid grid-cols-4 md:grid-cols-1 rounded-lg">
+        <div class="mb-2"><img src="{{ asset('LOGO_WHITE.png') }}" alt="Logo"></div>
+        <div><img src="{{ asset('CLAIM_NEGATIVE_RGB.png') }}" alt="Claim"></div>
 
         <x-nav-link href="/Namen">Mitarbeiter</x-nav-link>
 
