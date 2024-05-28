@@ -9,6 +9,8 @@
 
     @vite('resources/css/app.css')
     <link rel="stylesheet" type="text/css" href="{{ asset('style.css?v=') . time() }}" />
+
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
 <body class="overflow-y-auto">

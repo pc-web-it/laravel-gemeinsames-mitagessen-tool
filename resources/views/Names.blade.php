@@ -17,14 +17,14 @@
                 </div>
                 <!--
                 @if ($errors->any())
-                    <div class="text-sm text-red-600 absolute top-[70px] z-10 right-0 left-0">
+<div class="text-sm text-red-600 absolute top-[70px] z-10 right-0 left-0">
                         <ul>
                             @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
+<li>{{ $error }}</li>
+@endforeach
                         </ul>
                     </div>
-                @endif-->
+@endif-->
             </div>
 
         </form>
@@ -35,22 +35,23 @@
                 <div
                     class="relative grid grid-cols-6 m-2 py-3 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
-                    <form action="{{ route('name.upload', $name->id) }}" method="POST" enctype="multipart/form-data"
-                        class="col-span-2 flex items-center space-x-6">
+                    <form id="form-{{ $name->id }}" action="{{ route('name.upload', $name->id) }}" method="POST"
+                        enctype="multipart/form-data" class="col-span-2 flex items-center space-x-6">
                         @csrf
                         @method('PUT')
                         <div class="flex-container items-center space-x-2 relative">
-                            <div class="profile-icon-container relative">
-                                @if ($name->file_hash == null)
-                                    <img src="Profil.jpg" alt="" class="w-7 h-7 rounded-full">
-                                @else
-                                    <img src="{{ route('display.image', $name->file_hash) }}" alt=""
-                                        class="w-7 h-7 rounded-full object-cover">
-                                @endif
-                            </div>
-                            <label class="absolute p-[14px] cursor-pointer">
-                                <input type="file" name="file" class="hidden" onchange="form.submit()" />
+                            <label for="profile-{{ $name->id }}" class="cursor-pointer">
+                                <div class="profile-icon-container relative">
+                                    @if ($name->file_hash == null)
+                                        <img src="Profil.jpg" alt="" class="w-7 h-7 rounded-full">
+                                    @else
+                                        <img src="{{ route('display.image', $name->file_hash) }}" alt=""
+                                            class="w-7 h-7 rounded-full object-cover">
+                                    @endif
+                                </div>
                             </label>
+                            <input id="profile-{{ $name->id }}" type="file" name="file" class="hidden"
+                                onchange="document.getElementById('form-{{ $name->id }}').submit()" />
                             <div class="flex">
                                 @if ($name->praesentiert == 1)
                                     <img src="pr.png" alt="Praesentiert Icon" class="w-5 h-5 opacity-40">
@@ -90,11 +91,11 @@
                         </button>
                     </form>
 
-                    <form action="{{ route('name.destroy', $name->id) }}"
+                    <form id="delete-form-{{ $name->id }}" action="{{ route('name.destroy', $name->id) }}"
                         method="POST"class="col-span-1 flex items-center space-x-2">
                         @csrf
                         @method('DELETE')
-                        <button>
+                        <button type="button" onclick="showConfirmModal('{{ $name->name }}', 'names', 'delete-form-{{ $name->id }}')">
                             <img src="Delete.png" alt="" class="w-6 h-6 opacity-40 hover:opacity-50">
                         </button>
                     </form>
@@ -107,6 +108,8 @@
         </div>
 
     </div>
+
+    <x-confirm-alert />
 
     <script>
         // Save and ZZZ button appear or disappear logic in update form

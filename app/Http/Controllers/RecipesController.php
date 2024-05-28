@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Date;
 use App\Models\Employee;
 use App\Models\Recipe;
 use Illuminate\Http\Request;
@@ -188,6 +189,15 @@ class RecipesController extends Controller
      */
     public function destroy(Recipe $recipe)
     {
+        // Get all dates with the recipe
+        $datesLinked = Date::where('recipe_id', $recipe->id)->get();
+
+        // Remove the recipe id from all these dates
+        foreach($datesLinked as $date) {
+            $date->recipe_id = null;
+            $date->save();
+        }
+
         $recipe->delete();
 
         return redirect('/recipes');
