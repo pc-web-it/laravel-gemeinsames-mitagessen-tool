@@ -193,13 +193,6 @@ body {
   margin-left: 22%; 
 }
 
-
-
-/* .navbar{
-  background-color: #f5f5f559;
-} */
-
-
 .verlaufTitel{
   background-color: rgb(249,250,251);
   padding: 1%;
@@ -211,22 +204,26 @@ body {
 
 .containerGewinner{
   background-color: rgba(255, 255, 255, 0.5);
-  max-width: 70%;
-  /* padding-left: 10%;
-  padding-right: 10%; */
+  max-width: 60%;
+  padding-left: 3%;
+  padding-right: 3%;
   margin: auto;
   /* position: absolute; */
-  margin-left: 16%; 
+  margin-left: 22%; 
 
 }
 
 .winnerField{
-  width: 50%;
+  width: 80%;
   margin: auto;
-  margin-bottom: 1%;
-  padding-top: 1%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  padding-top: 2%;
   padding-left: 1%;
+  padding-bottom: 2%;
 }
+
+
 
 .gewinnerTitel{
   background-color: rgb(249,250,251);
@@ -335,7 +332,7 @@ padding: 5px;
   color: rgb(61,141,240);
   border-width: 2px;
   border-color: rgb(61,141,240);
-  border-radius: 24px;
+ 
 }
 
 .backBtn:hover{

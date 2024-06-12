@@ -56,7 +56,7 @@
 
 
                 <div class="flex items-center justify-center  ">
-                    <h2 class="col-span-2 mt-5">Praesentiert:</h2>
+                    <h2 class="col-span-2 mt-5"><strong>Präsentiert:</strong></h2>
 
                     <div class="col-span-2 mt-5">
                         <div class="flex items-center">
@@ -89,7 +89,7 @@
                     </div>
 
                 <div class="flex items-center">
-                    <h2 class="col-span-2 mt-5">Gekocht:</h2>
+                    <h2 class="col-span-2 mt-5"><strong>Gekocht:</strong></h2>
 
                     <div class="col-span-2 mt-5">
                         <div class="flex items-center">

@@ -9,14 +9,14 @@
             <!-- bg-sky-400 hover:bg-cyan-600 -->
 
             <a href="/recipes/create" class="flex flex-row-reverse">
-                <button class="newRecipeBtn text-white font-bold py-2 px-4 m-5 rounded drop-shadow-xl hover:scale-105 ease-in-out duration-300">
-                    New Recipe
+                <button class="newRecipeBtn rounded-full text-white font-bold py-2 px-4 m-5 rounded drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+                    Neues Rezept
                 </button>
             </a>
             @foreach ($recipes as $recipe)
             
                 <div
-                    class="flex items-center relative grid grid-cols-6 m-2 py-4  rounded-xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+                    class="flex items-center relative grid grid-cols-6 m-2 py-4  rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
 
                     <p class="col-span-3">{{ $recipe->title }}</p>
 
@@ -32,6 +32,7 @@
                             @else
                                 <img src="Profil.jpg" alt="" class="ml-8 w-9 h-9 rounded-full z-10">
                             @endif
+                            <p class="text-gray-700 ml-3">{{ $employees->find($recipe->employee_id)->name }}</p>
                         </div>
                     </div>
 
