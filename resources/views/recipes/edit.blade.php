@@ -69,10 +69,10 @@
                 <button
                     class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline"
                     type="submit">
-                    Aktualisieren
+                    Speichern
                 </button>
                 <a href="/recipes/{{ $recipe->id }}"
-                    class="backBtn inline-block align-baseline font-bold text-sm py-2 px-3"><img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">
+                    class="backBtn rounded-full inline-block align-baseline font-bold text-sm py-2 px-3"><img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">
                     Zurück
                 </a>
             </div>

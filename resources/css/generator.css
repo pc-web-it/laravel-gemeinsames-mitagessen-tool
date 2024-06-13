@@ -18,8 +18,8 @@ body {
 }
 
 .loginStyle {
-    background: rgb(39, 241, 255);
-    background: linear-gradient(90deg, rgba(48, 235, 255, 0.753) 0%, rgba(132, 112, 255, 0.7497373949579832) 100%);
+    background: rgb(106,80,255);
+    /* background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(167,152,255,1) 50%, rgba(39,0,255,1) 100%); */
 }
 
 .generatorAndBackground {
@@ -58,7 +58,6 @@ body {
 
 .winnersContainer {
     background-color: white;
-
     background-image: url('show_winners.jpg');
     background-size: cover;
     background-position: center;
@@ -72,7 +71,7 @@ body {
     font-size: 2rem;
     text-align: center;
     padding-top: 30px;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 }
 
 #numberForm {
@@ -138,7 +137,6 @@ body {
     justify-content: center;
     height: 80%;
 }
-
 .result {
     text-align: center;
     font-size: 1.5rem;
@@ -146,19 +144,22 @@ body {
     margin-top: 40%;
     color: rgb(79, 70, 229);
     text-shadow: 2px 2px 2px rgb(83, 235, 255);
-    animation: zoom-in-zoom-out 3s ease 3s forwards;
-    animation-delay: 3s;
+}
+.result.animate {    
+    animation-name: reveal;
+    animation-duration: 3s;
+    animation-delay: 0;
+    animation-fill-mode: forwards;  
 }
 
-@keyframes zoom-in-zoom-out {
-    0% {
-        transform: scale(0.5, 0.5);
-    }
+@keyframes reveal {
+    0% {scale: 0;}
+    90% {scale: 2;}
+    100% {scale: 1;}
+  }
 
-    100% {
-        transform: scale(1, 1);
-    }
-}
+
+
 
 .balloons {
     position: absolute;

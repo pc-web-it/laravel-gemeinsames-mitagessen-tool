@@ -51,21 +51,47 @@ function allNames() {
         namesArray.splice(randomIndex, 1);
     }
 
-
-    // Gewinner anzeigen
-    var winnersList = document.createElement("ul");
-    winners.forEach(function (winner) {
-        var listItem = document.createElement("li");
-        listItem.textContent = winner;
-        winnersList.appendChild(listItem);
-    });
-
     var resultDiv = document.querySelector(".result");
-    resultDiv.innerHTML = ` <div class="firework"></div>
-    <div class="firework"></div>
-    <div class="firework"></div>`;
-    resultDiv.appendChild(winnersList);
 
+    let running = setInterval( () => {
+
+        let randomIndex = Math.floor(Math.random() * namesArray.length);
+        let randomName = namesArray[randomIndex].trim();
+
+        let randomList = document.createElement("ul");
+        let randomListItem = document.createElement("li");
+        randomListItem.textContent = randomName;
+
+        randomListItem.style.color = "black";
+
+        
+        randomList.appendChild(randomListItem);
+
+        resultDiv.innerHTML = "";
+        resultDiv.appendChild(randomList)
+    },200) 
+
+    setTimeout(() => {
+
+        clearInterval(running)
+        resultDiv.innerHTML = '';
+
+        // Gewinner anzeigen
+        var winnersList = document.createElement("ul");
+        winners.forEach(function (winner) {
+            var listItem = document.createElement("li");
+            listItem.textContent = winner;
+            winnersList.appendChild(listItem);
+        });
+
+        resultDiv.innerHTML = ` <div class="firework"></div>
+        <div class="firework"></div>
+        <div class="firework"></div>`;
+        resultDiv.appendChild(winnersList);
+
+        resultDiv.classList.add('animate')
+    }, 5000)
+    
 
     var formData = new FormData();
     winners.forEach(function (winner) {

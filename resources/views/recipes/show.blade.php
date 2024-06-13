@@ -2,7 +2,7 @@
     <div class="rezeptContainer lg:max-w-2xl xl:max-w-4xl 2xl:max-w-5xl  mx-auto mt-8 p-10 bg-white ">
         <div class="max-w-5xl mx-auto mt-8 ">
             <div class="flex justify-between items-center mb-4">
-                <a href="/recipes" class="backBtn  font-bold text-lg py-2 px-2 focus:outline-none focus:shadow-outline">
+                <a href="/recipes" class="backBtn  font-bold text-lg py-3 px-2 rounded-full focus:outline-none focus:shadow-outline">
                     <img src="{{ asset('back2.jpg') }}" alt="Back" class="w-6 inline mr-2 mb-1">Zurück</a>
                 @if (isset($recipe->image))
                     @if ($recipe->image == null)
@@ -47,12 +47,12 @@
                     </a>
                 @endif
                 <a href="/recipes/{{ $recipe->id }}/edit"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-lg focus:outline-none focus:shadow-outline">Bearbeiten</a>
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-4 rounded-full focus:outline-none focus:shadow-outline">Bearbeiten</a>
                 <form id="delete-form-{{ $recipe->id }}" action="/recipes/{{ $recipe->id }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="button" onclick="showConfirmModal('{{ $recipe->title }}', 'recipes', 'delete-form-{{ $recipe->id }}')"
-                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-lg focus:outline-none focus:shadow-outline">Löschen</button>
+                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-4 rounded-full focus:outline-none focus:shadow-outline">Löschen</button>
                 </form>
             </div>
         </div>
