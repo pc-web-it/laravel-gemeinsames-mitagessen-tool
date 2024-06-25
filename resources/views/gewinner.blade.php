@@ -13,17 +13,17 @@
                 </h1>
 
                 <div class="grid grid-cols-2">
-                    <form action="{{ route('winner.destroy', $winner->id) }}" method="POST">
+                    <form id="delete-form-{{ $winner->id }}" action="{{ route('winner.destroy', $winner->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
+                        <button type="button" onclick="showConfirmModal('{{ $winner->winner_name }}', 'Gewinner', 'delete-form-{{ $winner->id }}')" class="text-left ml-2 mr-2 font-sans text-xl font-medium mt-4">
                             <img src="Delete.png" alt="" class="w-5 h-5 opacity-40 hover:opacity-50">
                         </button>
                     </form>
                 </div>
             </div>
 
-            <div class="winnerField font-sans text-lg font-normal relative grid grid-cols-4  rounded-xl m-2 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
+            <div class="winnerField font-sans text-lg font-normal relative grid grid-cols-4 rounded-xl m-2 rounded-2xl bg-gray-50 drop-shadow-xl hover:scale-105 ease-in-out duration-300">
                 <!-- Hier werden die Gewinner aus der Datenbank abgerufen und angezeigt -->
                 <div class="col-span-1 justify-self-center">
                     <strong>Name:</strong>
@@ -58,4 +58,7 @@
     <div class="flex-container">
         <img class="cup" src="cup.png" alt="cup">
     </div>
+
+    <!-- Bestätigungs-Modal -->
+    <x-confirm-alert />
 </x-layout>
