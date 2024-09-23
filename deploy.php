@@ -38,6 +38,14 @@ task('build', function () {
     run('cd {{release_path}} && build');
 });
 
+task('deploy:vendors-npm', function(){
+    run('cd {{release_path}} && npm install');
+});
+
+task('deploy:assets', function() {
+    run('cd {{release_path}} && npm run build');
+});
+
 task('deploy:clearOpCache', function() {
     $fcgi = run('ls {{fcgi}}');
     run("cd {{release_path}} && {{bin/php}} cachetool.phar --fcgi=$fcgi --tmp-dir={{tmp_dir}} opcache:reset");
@@ -49,6 +57,10 @@ after('deploy:failed', 'deploy:unlock');
 // Migrate database before symlink new release.
 
 before('deploy:symlink', 'artisan:migrate');
+
+before('deploy:symlink', 'deploy:assets');
+
+after('deploy:vendors', 'deploy:vendors-npm');
 
 after('deploy:symlink', 'deploy:clearOpCache');
 
